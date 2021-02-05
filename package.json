@@ -18,7 +18,8 @@
         "node-red-contrib-watt2kwh": "0.1.1",
         "node-red-dashboard": "2.27.0",
         "node-red-node-ui-table": "0.3.10",
-        "node-red-node-wol": "0.1.0"
+        "node-red-node-wol": "0.1.0",
+        "node-red-node-rbe": "0.2.9"
     },
     "node-red": {
         "settings": {
