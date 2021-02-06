@@ -799,7 +799,7 @@
         "type": "openhab2-controller",
         "name": "OpenHAB",
         "protocol": "http",
-        "host": "localhost",
+        "host": "192.168.0.67",
         "port": "8080",
         "path": "",
         "username": "",
@@ -4432,9 +4432,7 @@
             [],
             [],
             [],
-            [
-                "6ba5f4b5.d66c84"
-            ],
+            [],
             []
         ]
     },
