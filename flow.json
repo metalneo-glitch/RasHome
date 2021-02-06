@@ -2426,12 +2426,16 @@
         "id": "5dce264c.892fc",
         "type": "influxdb out",
         "z": "f6bd4cff.b20c7",
-        "influxdb": "",
+        "influxdb": "95c76cc2.f1041",
         "name": "",
         "measurement": "contatore",
         "precision": "",
         "retentionPolicy": "",
-        "x": 1020,
+        "database": "Energy",
+        "retentionPolicyV18Flux": "",
+        "org": "",
+        "bucket": "",
+        "x": 1120,
         "y": 440,
         "wires": []
     },
@@ -3268,12 +3272,16 @@
         "id": "d9fd1484.401be",
         "type": "influxdb out",
         "z": "73b7c891.499c78",
-        "influxdb": "",
+        "influxdb": "95c76cc2.f1041",
         "name": "",
         "measurement": "inverter",
         "precision": "",
         "retentionPolicy": "",
-        "x": 1110,
+        "database": "Energy",
+        "retentionPolicyV18Flux": "",
+        "org": "",
+        "bucket": "",
+        "x": 1130,
         "y": 660,
         "wires": []
     },
@@ -7200,45 +7208,6 @@
         ]
     },
     {
-        "id": "205129b1.61e9d6",
-        "type": "influxdb out",
-        "z": "d4fae0b8.1d7718",
-        "influxdb": "",
-        "name": "",
-        "measurement": "S7",
-        "precision": "",
-        "retentionPolicy": "",
-        "x": 900,
-        "y": 1120,
-        "wires": []
-    },
-    {
-        "id": "b5b2a8a3.1f95c",
-        "type": "influxdb out",
-        "z": "d4fae0b8.1d7718",
-        "influxdb": "",
-        "name": "",
-        "measurement": "MediaTab",
-        "precision": "",
-        "retentionPolicy": "",
-        "x": 920,
-        "y": 1160,
-        "wires": []
-    },
-    {
-        "id": "31f52bb6.f724f4",
-        "type": "influxdb out",
-        "z": "d4fae0b8.1d7718",
-        "influxdb": "",
-        "name": "",
-        "measurement": "S3Neo",
-        "precision": "",
-        "retentionPolicy": "",
-        "x": 920,
-        "y": 1200,
-        "wires": []
-    },
-    {
         "id": "88ef5141.00dc08",
         "type": "function",
         "z": "d4fae0b8.1d7718",
@@ -7297,15 +7266,9 @@
         "x": 580,
         "y": 1160,
         "wires": [
-            [
-                "205129b1.61e9d6"
-            ],
-            [
-                "b5b2a8a3.1f95c"
-            ],
-            [
-                "31f52bb6.f724f4"
-            ]
+            [],
+            [],
+            []
         ]
     },
     {
