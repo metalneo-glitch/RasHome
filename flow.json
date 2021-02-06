@@ -4775,8 +4775,7 @@
         "wires": [
             [
                 "c2e5cc3a.32c5e8",
-                "a01d8694.b2bef",
-                "80052fb5.08fb58"
+                "a01d8694.b2bef"
             ]
         ]
     },
@@ -11423,22 +11422,6 @@
         "name": "STATO CARICO",
         "x": 500,
         "y": 200,
-        "wires": []
-    },
-    {
-        "id": "80052fb5.08fb58",
-        "type": "debug",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 560,
-        "y": 280,
         "wires": []
     },
     {
