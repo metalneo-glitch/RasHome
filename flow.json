@@ -11655,7 +11655,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 700,
-        "y": 340,
+        "y": 360,
         "wires": []
     },
     {
