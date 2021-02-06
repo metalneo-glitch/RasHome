@@ -11675,16 +11675,17 @@
         "type": "function",
         "z": "d4fae0b8.1d7718",
         "name": "",
-        "func": "var uptime = new Date (msg.payload.uptime);\nmsg.payload = uptime.getDate() + \"d:\" + uptime.getHours() \n    + \"h:\" + uptime.getMinutes() + \"m:\" + uptime.getSeconds() + \"s\";\nreturn msg;",
+        "func": "var msg.payload = payload.loadavg[0] + \" \" + payload.loadavg[1] + \" \" + payload.loadavg[2];\nreturn msg;",
         "outputs": 1,
-        "noerr": 0,
+        "noerr": 4,
         "initialize": "",
         "finalize": "",
         "x": 520,
         "y": 340,
         "wires": [
             [
-                "cf6d9558.d6238"
+                "cf6d9558.d6238",
+                "eae9efb0.53c768"
             ]
         ]
     }
