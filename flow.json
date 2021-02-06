@@ -289,7 +289,7 @@
     {
         "id": "40011901.675e7",
         "type": "ui_tab",
-        "name": "Raspberry",
+        "name": "About",
         "icon": "info_outline",
         "order": 9,
         "disabled": false,
@@ -321,7 +321,7 @@
     {
         "id": "a63d0a.95063af8",
         "type": "ui_group",
-        "name": "RasHome",
+        "name": "System",
         "tab": "40011901.675e7",
         "order": 1,
         "disp": true,
@@ -1211,12 +1211,15 @@
         "payload": "true",
         "payloadType": "bool",
         "x": 90,
-        "y": 120,
+        "y": 80,
         "wires": [
             [
                 "71da91cb.d05d88",
                 "4c7d06fd.580db",
-                "79e74f12.c7f1a"
+                "79e74f12.c7f1a",
+                "9baf8181.434448",
+                "7f7aaf29.d48368",
+                "bbf0e7aa.0f196"
             ]
         ]
     },
@@ -1240,7 +1243,7 @@
         "to": "",
         "reg": false,
         "x": 540,
-        "y": 120,
+        "y": 80,
         "wires": [
             [
                 "6e84f21c.821cc4"
@@ -1267,7 +1270,7 @@
         "to": "",
         "reg": false,
         "x": 540,
-        "y": 160,
+        "y": 120,
         "wires": [
             [
                 "81d27fde.3a0dd8"
@@ -1280,10 +1283,11 @@
         "z": "d4fae0b8.1d7718",
         "name": "",
         "x": 370,
-        "y": 120,
+        "y": 80,
         "wires": [
             [
-                "50da37d3.adf338"
+                "50da37d3.adf338",
+                "eae9efb0.53c768"
             ]
         ]
     },
@@ -1293,7 +1297,7 @@
         "z": "d4fae0b8.1d7718",
         "name": "",
         "x": 380,
-        "y": 160,
+        "y": 120,
         "wires": [
             [
                 "98b432d9.62b5"
@@ -1345,7 +1349,7 @@
         "z": "d4fae0b8.1d7718",
         "name": "",
         "x": 370,
-        "y": 200,
+        "y": 160,
         "wires": [
             [
                 "83bb63bd.9572f"
@@ -1361,7 +1365,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 510,
-        "y": 200,
+        "y": 160,
         "wires": [
             [
                 "a30a1fcc.02143"
@@ -1375,7 +1379,7 @@
         "name": "Dati da RasHome",
         "info": "Dati dal sistema operativo",
         "x": 120,
-        "y": 80,
+        "y": 40,
         "wires": []
     },
     {
@@ -5817,7 +5821,7 @@
         "colorNormal": "#00b33c",
         "colorOff": "#595959",
         "min": 0,
-        "max": "1200",
+        "max": "1600",
         "segWarn": "",
         "segHigh": "",
         "unit": "",
@@ -5838,9 +5842,10 @@
         "hideValue": false,
         "tickmode": "segments",
         "peakmode": false,
+        "property": "payload",
         "peaktime": 3000,
         "x": 690,
-        "y": 120,
+        "y": 80,
         "wires": []
     },
     {
@@ -5881,7 +5886,7 @@
         "peakmode": false,
         "peaktime": 3000,
         "x": 690,
-        "y": 160,
+        "y": 120,
         "wires": []
     },
     {
@@ -5922,7 +5927,7 @@
         "peakmode": false,
         "peaktime": 3000,
         "x": 690,
-        "y": 200,
+        "y": 160,
         "wires": []
     },
     {
@@ -11442,6 +11447,77 @@
                 "3c478cef.e4644c",
                 "24ba01db.d46af6",
                 "4527be3e.c136d"
+            ]
+        ]
+    },
+    {
+        "id": "9baf8181.434448",
+        "type": "Uptime",
+        "z": "d4fae0b8.1d7718",
+        "name": "",
+        "x": 380,
+        "y": 200,
+        "wires": [
+            [
+                "f9f7f2ca.a81098"
+            ]
+        ]
+    },
+    {
+        "id": "f9f7f2ca.a81098",
+        "type": "ui_text",
+        "z": "d4fae0b8.1d7718",
+        "group": "a63d0a.95063af8",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Uptime",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 700,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "eae9efb0.53c768",
+        "type": "debug",
+        "z": "d4fae0b8.1d7718",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7f7aaf29.d48368",
+        "type": "OS",
+        "z": "d4fae0b8.1d7718",
+        "name": "",
+        "x": 360,
+        "y": 40,
+        "wires": [
+            [
+                "eae9efb0.53c768"
+            ]
+        ]
+    },
+    {
+        "id": "bbf0e7aa.0f196",
+        "type": "Loadavg",
+        "z": "d4fae0b8.1d7718",
+        "name": "",
+        "x": 380,
+        "y": 240,
+        "wires": [
+            [
+                "eae9efb0.53c768"
             ]
         ]
     }
