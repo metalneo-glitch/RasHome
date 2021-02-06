@@ -711,7 +711,9 @@
         "name": "",
         "usetls": false,
         "tls": "",
-        "influxdbVersion": "1.x"
+        "influxdbVersion": "1.8-flux",
+        "url": "localhost:8888",
+        "rejectUnauthorized": false
     },
     {
         "id": "8d730239.2e2118",
@@ -5085,10 +5087,14 @@
         "z": "e987eb50.a7ba78",
         "influxdb": "8fa880a5.0fcee8",
         "name": "",
-        "measurement": "nissan",
+        "measurement": "Ricarica Nissan",
         "precision": "",
         "retentionPolicy": "",
-        "x": 1130,
+        "database": "Energy",
+        "retentionPolicyV18Flux": "15d",
+        "org": "",
+        "bucket": "",
+        "x": 1150,
         "y": 740,
         "wires": []
     },
