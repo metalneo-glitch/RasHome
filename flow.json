@@ -1214,11 +1214,7 @@
         "y": 80,
         "wires": [
             [
-                "71da91cb.d05d88",
-                "4c7d06fd.580db",
-                "79e74f12.c7f1a",
-                "9baf8181.434448",
-                "bbf0e7aa.0f196"
+                "cc813a9b.7cfe9"
             ]
         ]
     },
@@ -11654,14 +11650,14 @@
         "order": 6,
         "width": 0,
         "height": 0,
-        "passthru": false,
+        "passthru": true,
         "label": "REFRESH",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
         "icon": "autorenew",
-        "payload": "",
-        "payloadType": "str",
+        "payload": "true",
+        "payloadType": "bool",
         "topic": "",
         "x": 80,
         "y": 120,
