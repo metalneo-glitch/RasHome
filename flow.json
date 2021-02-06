@@ -5083,7 +5083,7 @@
         "precision": "",
         "retentionPolicy": "",
         "database": "Energy",
-        "retentionPolicyV18Flux": "15d",
+        "retentionPolicyV18Flux": "",
         "org": "",
         "bucket": "",
         "x": 1170,
