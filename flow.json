@@ -11615,7 +11615,7 @@
         "type": "function",
         "z": "d4fae0b8.1d7718",
         "name": "",
-        "func": "\nreturn msg;",
+        "func": "msg.payload = new Date (msg.payload.uptime);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
