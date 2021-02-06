@@ -1,7 +1,7 @@
 {
     "name": "RasHome",
-    "description": "A Node-RED Project",
-    "version": "0.0.1",
+    "description": "RasHome",
+    "version": "4.0.0",
     "dependencies": {
         "node-red-configurable-ping": "1.0.1",
         "node-red-contrib-buffer-array": "1.1.0",
