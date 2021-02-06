@@ -11675,7 +11675,7 @@
         "type": "function",
         "z": "d4fae0b8.1d7718",
         "name": "",
-        "func": "var msg.payload = payload.loadavg[0] + \" \" + payload.loadavg[1] + \" \" + payload.loadavg[2];\nreturn msg;",
+        "func": "var msg.payload = msg.payload.loadavg[0] + \" \" + msg.payload.loadavg[1] + \" \" + msg.payload.loadavg[2];\nreturn msg;",
         "outputs": 1,
         "noerr": 4,
         "initialize": "",
