@@ -1282,7 +1282,6 @@
         "wires": [
             [
                 "50da37d3.adf338",
-                "eae9efb0.53c768",
                 "ff7a348.c8c4a48"
             ]
         ]
@@ -1296,8 +1295,7 @@
         "y": 220,
         "wires": [
             [
-                "98b432d9.62b5",
-                "12cc0ab9.5cd885"
+                "98b432d9.62b5"
             ]
         ]
     },
@@ -11514,15 +11512,15 @@
         "type": "debug",
         "z": "d4fae0b8.1d7718",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 530,
-        "y": 40,
+        "x": 350,
+        "y": 420,
         "wires": []
     },
     {
@@ -11531,10 +11529,11 @@
         "z": "d4fae0b8.1d7718",
         "name": "",
         "x": 380,
-        "y": 100,
+        "y": 340,
         "wires": [
             [
-                "eae9efb0.53c768"
+                "eae9efb0.53c768",
+                "6ae62968.d9ab6"
             ]
         ]
     },
@@ -11626,22 +11625,6 @@
         ]
     },
     {
-        "id": "12cc0ab9.5cd885",
-        "type": "debug",
-        "z": "d4fae0b8.1d7718",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 490,
-        "y": 380,
-        "wires": []
-    },
-    {
         "id": "cc813a9b.7cfe9",
         "type": "ui_button",
         "z": "d4fae0b8.1d7718",
@@ -11668,6 +11651,40 @@
                 "4c7d06fd.580db",
                 "71da91cb.d05d88",
                 "bbf0e7aa.0f196"
+            ]
+        ]
+    },
+    {
+        "id": "cf6d9558.d6238",
+        "type": "ui_text",
+        "z": "d4fae0b8.1d7718",
+        "group": "a63d0a.95063af8",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Load Avg.",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 700,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "6ae62968.d9ab6",
+        "type": "function",
+        "z": "d4fae0b8.1d7718",
+        "name": "",
+        "func": "var uptime = new Date (msg.payload.uptime);\nmsg.payload = uptime.getDate() + \"d:\" + uptime.getHours() \n    + \"h:\" + uptime.getMinutes() + \"m:\" + uptime.getSeconds() + \"s\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 520,
+        "y": 340,
+        "wires": [
+            [
+                "cf6d9558.d6238"
             ]
         ]
     }
