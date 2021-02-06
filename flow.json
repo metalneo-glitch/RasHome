@@ -1270,7 +1270,7 @@
         "to": "",
         "reg": false,
         "x": 540,
-        "y": 120,
+        "y": 160,
         "wires": [
             [
                 "81d27fde.3a0dd8"
@@ -1287,7 +1287,8 @@
         "wires": [
             [
                 "50da37d3.adf338",
-                "eae9efb0.53c768"
+                "eae9efb0.53c768",
+                "ff7a348.c8c4a48"
             ]
         ]
     },
@@ -1297,7 +1298,7 @@
         "z": "d4fae0b8.1d7718",
         "name": "",
         "x": 380,
-        "y": 120,
+        "y": 160,
         "wires": [
             [
                 "98b432d9.62b5"
@@ -1349,7 +1350,7 @@
         "z": "d4fae0b8.1d7718",
         "name": "",
         "x": 370,
-        "y": 160,
+        "y": 200,
         "wires": [
             [
                 "83bb63bd.9572f"
@@ -1365,7 +1366,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 510,
-        "y": 160,
+        "y": 200,
         "wires": [
             [
                 "a30a1fcc.02143"
@@ -5814,7 +5815,7 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "name": "",
+        "name": "CPU 0",
         "label": "CPU",
         "colorHi": "#e60000",
         "colorWarn": "#ff9900",
@@ -5856,7 +5857,7 @@
         "order": 2,
         "width": 0,
         "height": 0,
-        "name": "",
+        "name": "MEM",
         "label": "RAM",
         "colorHi": "#e60000",
         "colorWarn": "#ff9900",
@@ -5884,9 +5885,10 @@
         "hideValue": false,
         "tickmode": "auto",
         "peakmode": false,
+        "property": "payload",
         "peaktime": 3000,
         "x": 690,
-        "y": 120,
+        "y": 160,
         "wires": []
     },
     {
@@ -5897,7 +5899,7 @@
         "order": 3,
         "width": 0,
         "height": 0,
-        "name": "",
+        "name": "SSD",
         "label": "SDD",
         "colorHi": "#e60000",
         "colorWarn": "#ff9900",
@@ -5925,9 +5927,10 @@
         "hideValue": false,
         "tickmode": "auto",
         "peakmode": false,
+        "property": "payload",
         "peaktime": 3000,
         "x": 690,
-        "y": 160,
+        "y": 200,
         "wires": []
     },
     {
@@ -11456,7 +11459,7 @@
         "z": "d4fae0b8.1d7718",
         "name": "",
         "x": 380,
-        "y": 200,
+        "y": 240,
         "wires": [
             [
                 "f9f7f2ca.a81098"
@@ -11476,7 +11479,7 @@
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "x": 700,
-        "y": 200,
+        "y": 240,
         "wires": []
     },
     {
@@ -11514,11 +11517,80 @@
         "z": "d4fae0b8.1d7718",
         "name": "",
         "x": 380,
-        "y": 240,
+        "y": 280,
         "wires": [
             [
                 "eae9efb0.53c768"
             ]
         ]
+    },
+    {
+        "id": "ff7a348.c8c4a48",
+        "type": "change",
+        "z": "d4fae0b8.1d7718",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.cpus[1].speed",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 120,
+        "wires": [
+            [
+                "444d0124.f1eea"
+            ]
+        ]
+    },
+    {
+        "id": "444d0124.f1eea",
+        "type": "ui_level",
+        "z": "d4fae0b8.1d7718",
+        "group": "a63d0a.95063af8",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "CPU 1",
+        "label": "CPU",
+        "colorHi": "#e60000",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": 0,
+        "max": "1600",
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": "3",
+        "colorschema": "fixed",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "segments",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 690,
+        "y": 120,
+        "wires": []
     }
 ]
