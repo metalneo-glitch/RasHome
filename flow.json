@@ -1203,6 +1203,11 @@
         "type": "inject",
         "z": "d4fae0b8.1d7718",
         "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
         "repeat": "60",
         "crontab": "",
         "once": true,
@@ -11508,22 +11513,6 @@
         "wires": []
     },
     {
-        "id": "eae9efb0.53c768",
-        "type": "debug",
-        "z": "d4fae0b8.1d7718",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 350,
-        "y": 420,
-        "wires": []
-    },
-    {
         "id": "bbf0e7aa.0f196",
         "type": "Loadavg",
         "z": "d4fae0b8.1d7718",
@@ -11532,7 +11521,6 @@
         "y": 340,
         "wires": [
             [
-                "eae9efb0.53c768",
                 "6ae62968.d9ab6"
             ]
         ]
@@ -11684,8 +11672,7 @@
         "y": 340,
         "wires": [
             [
-                "cf6d9558.d6238",
-                "eae9efb0.53c768"
+                "cf6d9558.d6238"
             ]
         ]
     }
