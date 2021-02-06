@@ -1210,7 +1210,7 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 90,
+        "x": 130,
         "y": 80,
         "wires": [
             [
@@ -11637,8 +11637,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 530,
-        "y": 460,
+        "x": 490,
+        "y": 380,
         "wires": []
     },
     {
@@ -11659,7 +11659,7 @@
         "payload": "true",
         "payloadType": "bool",
         "topic": "",
-        "x": 80,
+        "x": 120,
         "y": 120,
         "wires": [
             [
