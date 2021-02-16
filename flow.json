@@ -5827,7 +5827,7 @@
         "width": 0,
         "height": 0,
         "name": "CPU 0",
-        "label": "CPU",
+        "label": "CPU 1",
         "colorHi": "#e60000",
         "colorWarn": "#ff9900",
         "colorNormal": "#00b33c",
@@ -5836,7 +5836,7 @@
         "max": "1600",
         "segWarn": "",
         "segHigh": "",
-        "unit": "",
+        "unit": "MHz",
         "layout": "sh",
         "channelA": "",
         "channelB": "",
@@ -6183,7 +6183,7 @@
         "z": "d4fae0b8.1d7718",
         "name": "Restart Node-Red",
         "group": "a63d0a.95063af8",
-        "order": 7,
+        "order": 9,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -11561,7 +11561,7 @@
         "width": 0,
         "height": 0,
         "name": "CPU 1",
-        "label": "CPU",
+        "label": "CPU 2",
         "colorHi": "#e60000",
         "colorWarn": "#ff9900",
         "colorNormal": "#00b33c",
@@ -11570,7 +11570,7 @@
         "max": "1600",
         "segWarn": "",
         "segHigh": "",
-        "unit": "",
+        "unit": "MHz",
         "layout": "sh",
         "channelA": "",
         "channelB": "",
@@ -11618,7 +11618,7 @@
         "z": "d4fae0b8.1d7718",
         "name": "Refresh",
         "group": "a63d0a.95063af8",
-        "order": 6,
+        "order": 8,
         "width": 0,
         "height": 0,
         "passthru": true,
@@ -11638,7 +11638,9 @@
                 "79e74f12.c7f1a",
                 "4c7d06fd.580db",
                 "71da91cb.d05d88",
-                "bbf0e7aa.0f196"
+                "bbf0e7aa.0f196",
+                "ac145b3f.ddd298",
+                "1bae3ab9.069ff5"
             ]
         ]
     },
@@ -11647,7 +11649,7 @@
         "type": "ui_text",
         "z": "d4fae0b8.1d7718",
         "group": "a63d0a.95063af8",
-        "order": 5,
+        "order": 6,
         "width": 0,
         "height": 0,
         "name": "",
@@ -11673,6 +11675,162 @@
         "wires": [
             [
                 "cf6d9558.d6238"
+            ]
+        ]
+    },
+    {
+        "id": "ac145b3f.ddd298",
+        "type": "exec",
+        "z": "d4fae0b8.1d7718",
+        "command": "sensors -j",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 380,
+        "y": 380,
+        "wires": [
+            [
+                "a0824249.d5cfd"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "a0824249.d5cfd",
+        "type": "json",
+        "z": "d4fae0b8.1d7718",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 510,
+        "y": 380,
+        "wires": [
+            [
+                "8620ce8.e6c653"
+            ]
+        ]
+    },
+    {
+        "id": "336a450e.42d6ea",
+        "type": "ui_level",
+        "z": "d4fae0b8.1d7718",
+        "group": "a63d0a.95063af8",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "SYS TEMP",
+        "label": "GPU TEMP",
+        "colorHi": "#e60000",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": 0,
+        "max": "135",
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "°C",
+        "layout": "ph",
+        "channelA": "GPU",
+        "channelB": "CPU",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": "2",
+        "colorschema": "rainbow",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": true,
+        "hideValue": false,
+        "tickmode": "auto",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 810,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8620ce8.e6c653",
+        "type": "function",
+        "z": "d4fae0b8.1d7718",
+        "name": "",
+        "func": "msg1 = {};\nmsg2 = {};\n\nvar gpuTemp = msg.payload[\"nouveau-pci-0200\"].temp1.temp1_input;\nvar cpuTemp = msg.payload[\"coretemp-isa-0000\"][\"Core 0\"].temp2_input;\n\nvar arrayTemp = [gpuTemp, cpuTemp];\nmsg1.payload = arrayTemp;\n\nmsg2.payload = {\n    \"gpuTemp\" : gpuTemp,\n    \"cpuTemp\" : cpuTemp\n}\n\nreturn [msg1, msg2];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 660,
+        "y": 380,
+        "wires": [
+            [
+                "336a450e.42d6ea"
+            ],
+            [
+                "b9e6dfa3.39a5b8"
+            ]
+        ]
+    },
+    {
+        "id": "b9e6dfa3.39a5b8",
+        "type": "influxdb out",
+        "z": "d4fae0b8.1d7718",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "measurement": "temperature",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "system",
+        "retentionPolicyV18Flux": "",
+        "org": "",
+        "bucket": "",
+        "x": 910,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "1bae3ab9.069ff5",
+        "type": "exec",
+        "z": "d4fae0b8.1d7718",
+        "command": "hddtemp /dev/sda",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 410,
+        "y": 440,
+        "wires": [
+            [
+                "9512c387.c247e"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "9512c387.c247e",
+        "type": "function",
+        "z": "d4fae0b8.1d7718",
+        "name": "",
+        "func": "msg.payload = {\n    \"sda\" : Number(msg.payload.slice(27,29))\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 620,
+        "y": 440,
+        "wires": [
+            [
+                "b9e6dfa3.39a5b8"
             ]
         ]
     }
