@@ -146,8 +146,9 @@
     {
         "id": "c0642d23.ec7808",
         "type": "subflow",
-        "name": "Subflow 1",
+        "name": "Solarnode OLD",
         "info": "",
+        "category": "",
         "in": [],
         "out": [
             {
@@ -170,7 +171,9 @@
                     }
                 ]
             }
-        ]
+        ],
+        "env": [],
+        "color": "#DDAA99"
     },
     {
         "id": "ee95ae30.7fefe8",
@@ -700,7 +703,7 @@
     {
         "id": "2d75dba2.a41bd4",
         "type": "ui_tab",
-        "name": "Luci",
+        "name": "Dispositivi",
         "icon": "lightbulb_outline",
         "order": 2,
         "disabled": false,
@@ -770,6 +773,16 @@
         "influxdbVersion": "1.8-flux",
         "url": "http://localhost:8086",
         "rejectUnauthorized": true
+    },
+    {
+        "id": "17c8dd48.77be83",
+        "type": "noraf-config",
+        "name": "SmartNORA",
+        "group": "NewSmart",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "localexecution": true,
+        "structure": "Campo"
     },
     {
         "id": "dc4f7c3c.a32ee8",
@@ -2006,22 +2019,6 @@
         ]
     },
     {
-        "id": "9e2a3d75.456a8",
-        "type": "ui_text",
-        "z": "f6bd4cff.b20c7",
-        "group": "9c73e713.f5be88",
-        "order": 10,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Energia totale",
-        "format": "{{msg.payload.totalEnergy.toFixed(2)}} kWh",
-        "layout": "row-spread",
-        "x": 1740,
-        "y": 440,
-        "wires": []
-    },
-    {
         "id": "1c6babc4.b03b5c",
         "type": "ui_text",
         "z": "f6bd4cff.b20c7",
@@ -2111,100 +2108,12 @@
                 "1c6babc4.b03b5c",
                 "ba99394a.c7c87",
                 "5dce264c.892fc",
-                "9a15db10.6d4e7",
                 "583e86dc.540d28",
                 "868c51ce.07469",
                 "9093f3e5.794cc",
                 "291f7b62.684a74"
             ],
             []
-        ]
-    },
-    {
-        "id": "81167430.f37ea8",
-        "type": "watt2kwh",
-        "z": "f6bd4cff.b20c7",
-        "format": "wh",
-        "maximum": "62",
-        "maximumunit": "secs",
-        "name": "",
-        "x": 1220,
-        "y": 400,
-        "wires": [
-            [
-                "25f99fb2.a4d928"
-            ]
-        ]
-    },
-    {
-        "id": "71242e7a.2736d8",
-        "type": "ui_text",
-        "z": "f6bd4cff.b20c7",
-        "group": "9c73e713.f5be88",
-        "order": 9,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Energia ieri",
-        "format": "{{msg.payload.yesterdayEnergy.toFixed(2)}} kWh",
-        "layout": "row-spread",
-        "x": 1730,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "d58bc31d.e0af18",
-        "type": "ui_text",
-        "z": "f6bd4cff.b20c7",
-        "group": "9c73e713.f5be88",
-        "order": 8,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Energia oggi",
-        "format": "{{msg.payload.todayEnergy.toFixed(2)}} kWh",
-        "layout": "row-spread",
-        "x": 1730,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "25f99fb2.a4d928",
-        "type": "function",
-        "z": "f6bd4cff.b20c7",
-        "name": "",
-        "func": "var todayEnergyVal = flow.get('todayEnergy') || 0;\nvar yesterdayEnergyVal = flow.get('yesterdayEnergy') || 0;\nvar totalEnergyVal = flow.get('totalEnergy') || 0;\n\nif (msg.payload === \"reset\") {\n    yesterdayEnergyVal = todayEnergyVal;\n    todayEnergyVal = 0;\n\n}\nelse if(!isNaN(msg.payload)){\n    todayEnergyVal += msg.payload;\n    totalEnergyVal += msg.payload;\n}\nelse if('last_todayEnergy' in msg.payload){\n    todayEnergyVal = msg.payload.last_todayEnergy;\n    yesterdayEnergyVal = msg.payload.last_yesterdayEnergy;\n    totalEnergyVal = msg.payload.last_totalEnergy;\n}\n\nflow.set('yesterdayEnergy', yesterdayEnergyVal);\nflow.set('todayEnergy', todayEnergyVal);\nflow.set('totalEnergy', totalEnergyVal);\n    \nmsg.payload = {\n    todayEnergy : todayEnergyVal,\n    yesterdayEnergy : yesterdayEnergyVal,\n    totalEnergy : totalEnergyVal\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1430,
-        "y": 400,
-        "wires": [
-            [
-                "d58bc31d.e0af18",
-                "9e2a3d75.456a8",
-                "71242e7a.2736d8",
-                "53e31ec4.00072"
-            ]
-        ]
-    },
-    {
-        "id": "bf694ada.46edb8",
-        "type": "inject",
-        "z": "f6bd4cff.b20c7",
-        "name": "Daily reset",
-        "repeat": "",
-        "crontab": "59 23 * * *",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "reset",
-        "payloadType": "str",
-        "x": 1230,
-        "y": 360,
-        "wires": [
-            [
-                "25f99fb2.a4d928"
-            ]
         ]
     },
     {
@@ -2453,50 +2362,6 @@
         "bucket": "",
         "x": 1120,
         "y": 440,
-        "wires": []
-    },
-    {
-        "id": "9a15db10.6d4e7",
-        "type": "change",
-        "z": "f6bd4cff.b20c7",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.power",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1040,
-        "y": 400,
-        "wires": [
-            [
-                "81167430.f37ea8"
-            ]
-        ]
-    },
-    {
-        "id": "53e31ec4.00072",
-        "type": "influxdb out",
-        "z": "f6bd4cff.b20c7",
-        "influxdb": "95c76cc2.f1041",
-        "name": "",
-        "measurement": "contatore",
-        "precision": "",
-        "retentionPolicy": "",
-        "database": "Energy",
-        "retentionPolicyV18Flux": "",
-        "org": "",
-        "bucket": "",
-        "x": 1830,
-        "y": 480,
         "wires": []
     },
     {
@@ -4153,24 +4018,6 @@
         "wires": []
     },
     {
-        "id": "8c0585b6.241ec",
-        "type": "function",
-        "z": "d4025d43.ce8fc",
-        "name": "Esporta dati temperatura",
-        "func": "var soffittaTempVal=flow.get('soffitta_temp') || 0;\nvar soffittaMaxTempVal=flow.get('soffitta_max_temp') || 0;\nvar soffittaMinTempVal=flow.get('soffitta_min_temp') || 50;\n\nsoffittaTempVal = msg.payload.temperature;\n\nif (soffittaTempVal<soffittaMinTempVal){\n    soffittaMinTempVal = soffittaTempVal;\n}\n\nif (soffittaTempVal>soffittaMaxTempVal){\n    soffittaMaxTempVal = soffittaTempVal;\n}\n\nflow.set('soffitta_temp', soffittaTempVal);\nflow.set('soffitta_max_temp', soffittaMaxTempVal);\nflow.set('soffitta_min_temp', soffittaMinTempVal);\n\nmsg.payload = {\n    temperature : soffittaTempVal,\n    soffittaMaxTemp : soffittaMaxTempVal,\n    soffittaMinTemp : soffittaMinTempVal\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 830,
-        "y": 100,
-        "wires": [
-            [
-                "c5deda27.2751f",
-                "d82bab4b.a94868",
-                "240ed2f0.00ad76"
-            ]
-        ]
-    },
-    {
         "id": "d82bab4b.a94868",
         "type": "ui_text",
         "z": "d4025d43.ce8fc",
@@ -4180,7 +4027,7 @@
         "height": 1,
         "name": "TMAX",
         "label": "Massima: ",
-        "format": "{{msg.payload.soffittaMaxTemp}} °C",
+        "format": "{{msg.payload}} °C",
         "layout": "row-center",
         "x": 1090,
         "y": 140,
@@ -4196,29 +4043,11 @@
         "height": 1,
         "name": "TMIN",
         "label": "Minima",
-        "format": "{{msg.payload.soffittaMinTemp}} °C",
+        "format": "{{msg.payload}} °C",
         "layout": "row-center",
         "x": 1090,
         "y": 180,
         "wires": []
-    },
-    {
-        "id": "e1e9c27a.2f01e8",
-        "type": "function",
-        "z": "d4025d43.ce8fc",
-        "name": "Esporta dati umidità",
-        "func": "var soffittaUmidVal=flow.get('soffitta_umid') || 0;\nvar soffittaMaxUmidVal=flow.get('soffitta_max_umid') || 0;\nvar soffittaMinUmidVal=flow.get('soffitta_min_umid') || 50;\n\nsoffittaUmidVal = msg.payload.humidity;\n\nif (soffittaUmidVal<soffittaMinUmidVal){\n    soffittaMinUmidVal = soffittaUmidVal;\n}\n\nif (soffittaUmidVal>soffittaMaxUmidVal){\n    soffittaMaxUmidVal = soffittaUmidVal;\n}\n\nflow.set('soffitta_umid', soffittaUmidVal);\nflow.set('soffitta_max_umid', soffittaMaxUmidVal);\nflow.set('soffitta_min_umid', soffittaMinUmidVal);\n\nmsg.payload = {\n    humidity : soffittaUmidVal,\n    soffittaMaxTemp : soffittaMaxUmidVal,\n    soffittaMinTemp : soffittaMinUmidVal\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 820,
-        "y": 220,
-        "wires": [
-            [
-                "42cfd901.ee6328",
-                "a077ca6d.783138",
-                "bcb918ff.5447b8"
-            ]
-        ]
     },
     {
         "id": "42cfd901.ee6328",
@@ -4230,7 +4059,7 @@
         "height": 1,
         "name": "H MAX",
         "label": "Massimo: ",
-        "format": "{{msg.payload.soffittaMaxTemp}} %",
+        "format": "{{msg.payload}} %",
         "layout": "row-center",
         "x": 1100,
         "y": 260,
@@ -4246,7 +4075,7 @@
         "height": 1,
         "name": "H MIN",
         "label": "Minimo: ",
-        "format": "{{msg.payload.soffittaMinTemp}} %",
+        "format": "{{msg.payload}} %",
         "layout": "row-center",
         "x": 1090,
         "y": 300,
@@ -4262,7 +4091,7 @@
         "commandType": "str",
         "commandCase": false,
         "x": 130,
-        "y": 460,
+        "y": 440,
         "wires": [
             [
                 "95b9a260.bc3c7"
@@ -4274,11 +4103,13 @@
         "type": "function",
         "z": "d4025d43.ce8fc",
         "name": "Invio misure",
-        "func": "var soffitta_temp=flow.get('soffitta_temp') || 0;\nvar soffitta_max_temp=flow.get('soffitta_max_temp') || 0;\nvar soffitta_min_temp=flow.get('soffitta_min_temp') || 50;\nvar soffitta_umid=flow.get('soffitta_umid') || 0;\nvar soffitta_max_umid=flow.get('soffitta_max_umid') || 0;\nvar soffitta_min_umid=flow.get('soffitta_min_umid') || 100;\n\nvar currentdate = new Date();\nvar datetime = currentdate.getDate() + \"/\" + (currentdate.getMonth()+1) + \"/\" + currentdate.getFullYear() + \" - \" + currentdate.getHours() + \":\" +currentdate.getMinutes() + \":\" + currentdate.getSeconds();\n\nmsg.payload = datetime + \"\\nDati Soffitta:\\nTemperatura: \" + soffitta_temp + \" °C\\nTemperatura massima: \" + soffitta_max_temp + \" °C\\nTemperatura minima: \" + soffitta_min_temp + \" °C\\n\\nUmidità: \" + soffitta_umid +  \"%\\nUmidità massima: \" + soffitta_max_umid + \"%\\nUmidità minima: \" + soffitta_min_umid + \" %\\n\";\n\nreturn msg;",
+        "func": "var camera_temp=flow.get('camera_temp') || 0;\nvar camera_umid=flow.get('camera_umid') || 0;\n\nvar currentdate = new Date();\nvar datetime = currentdate.getDate() + \"/\" + (currentdate.getMonth()+1) + \"/\" + currentdate.getFullYear() + \" - \" + currentdate.getHours() + \":\" +currentdate.getMinutes() + \":\" + currentdate.getSeconds();\n\nmsg.payload = datetime + \"\\nDati Camera:\\nTemperatura: \" + camera_temp + \" °C\\n\\nUmidità: \" + camera_umid +  \"%\";\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 470,
-        "y": 460,
+        "initialize": "",
+        "finalize": "",
+        "x": 330,
+        "y": 440,
         "wires": [
             [
                 "7befb976.e0de"
@@ -4292,7 +4123,7 @@
         "name": "Comandi Telegram",
         "info": "",
         "x": 130,
-        "y": 420,
+        "y": 400,
         "wires": []
     },
     {
@@ -4329,13 +4160,20 @@
         "func": "var temperatureVal;\nvar humidityVal;\n\nif('StatusSNS' in msg.payload){\n    temperatureVal = msg.payload.StatusSNS.DHT11.Temperature;\n    humidityVal = msg.payload.StatusSNS.DHT11.Humidity;\n}\nelse{\n    temperatureVal = msg.payload.DHT11.Temperature;\n    humidityVal = msg.payload.DHT11.Humidity;\n}\n\n\nmsg.payload = {\n    temperature : temperatureVal,\n    humidity : humidityVal\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 600,
         "y": 100,
         "wires": [
             [
-                "8c0585b6.241ec",
-                "e1e9c27a.2f01e8",
-                "706391fc.5eae"
+                "706391fc.5eae",
+                "b2211c99.ebecc8",
+                "b52c873e.440b9",
+                "65c80c3f.e47ad4",
+                "98ab78a7.2239a8",
+                "ac5a1889.5a8da8",
+                "1e2ea53c.5f472b",
+                "1996d18d.f754fe"
             ]
         ]
     },
@@ -4749,36 +4587,6 @@
         ]
     },
     {
-        "id": "f8ec710.22a979",
-        "type": "mqtt out",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "cmnd/tasmotaRicaricaNissan/STATUS",
-        "qos": "0",
-        "retain": "false",
-        "broker": "ee95ae30.7fefe8",
-        "x": 910,
-        "y": 880,
-        "wires": []
-    },
-    {
-        "id": "2ad3b99c.6bb386",
-        "type": "mqtt in",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "stat/tasmotaRicaricaNissan/STATUS8",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "ee95ae30.7fefe8",
-        "x": 210,
-        "y": 200,
-        "wires": [
-            [
-                "72a56144.6e403"
-            ]
-        ]
-    },
-    {
         "id": "72a56144.6e403",
         "type": "json",
         "z": "e987eb50.a7ba78",
@@ -4787,11 +4595,10 @@
         "action": "",
         "pretty": false,
         "x": 450,
-        "y": 200,
+        "y": 80,
         "wires": [
             [
-                "c2e5cc3a.32c5e8",
-                "a01d8694.b2bef"
+                "c2e5cc3a.32c5e8"
             ]
         ]
     },
@@ -4805,7 +4612,7 @@
         "datatype": "auto",
         "broker": "ee95ae30.7fefe8",
         "x": 210,
-        "y": 260,
+        "y": 120,
         "wires": [
             [
                 "72a56144.6e403"
@@ -4834,8 +4641,8 @@
         ],
         "seg1": "220",
         "seg2": "240",
-        "x": 1240,
-        "y": 40,
+        "x": 1140,
+        "y": 80,
         "wires": []
     },
     {
@@ -4860,36 +4667,9 @@
         ],
         "seg1": "13",
         "seg2": "14",
-        "x": 1160,
-        "y": 140,
+        "x": 1140,
+        "y": 120,
         "wires": []
-    },
-    {
-        "id": "4434b330.12340c",
-        "type": "ui_button",
-        "z": "e987eb50.a7ba78",
-        "name": "Manual refresh",
-        "group": "5aaf39ff.58f93",
-        "order": 10,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "label": "Refresh",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "8",
-        "payloadType": "str",
-        "topic": "",
-        "x": 440,
-        "y": 880,
-        "wires": [
-            [
-                "77686a88.4c70f4",
-                "e8a64a5c.eece88"
-            ]
-        ]
     },
     {
         "id": "9b0769cb.b950d8",
@@ -4903,8 +4683,8 @@
         "label": "Energia totale",
         "format": "{{msg.payload.energyTotal}} kWh",
         "layout": "row-spread",
-        "x": 1060,
-        "y": 540,
+        "x": 940,
+        "y": 480,
         "wires": []
     },
     {
@@ -4919,8 +4699,8 @@
         "label": "Potenza",
         "format": "{{msg.payload}} W",
         "layout": "row-spread",
-        "x": 1400,
-        "y": 280,
+        "x": 1200,
+        "y": 240,
         "wires": []
     },
     {
@@ -4935,8 +4715,8 @@
         "label": "Potenza apparente",
         "format": "{{msg.payload.apparentPower}} VA",
         "layout": "row-spread",
-        "x": 1070,
-        "y": 300,
+        "x": 950,
+        "y": 240,
         "wires": []
     },
     {
@@ -4951,8 +4731,8 @@
         "label": "Potenza reattiva",
         "format": "{{msg.payload.reactivePower}} VAr",
         "layout": "row-spread",
-        "x": 1060,
-        "y": 260,
+        "x": 940,
+        "y": 200,
         "wires": []
     },
     {
@@ -4967,8 +4747,8 @@
         "label": "Cos fi",
         "format": "{{msg.payload.factor}}",
         "layout": "row-spread",
-        "x": 1030,
-        "y": 340,
+        "x": 910,
+        "y": 280,
         "wires": []
     },
     {
@@ -4993,8 +4773,8 @@
         ],
         "seg1": "13",
         "seg2": "14",
-        "x": 1400,
-        "y": 240,
+        "x": 1200,
+        "y": 200,
         "wires": []
     },
     {
@@ -5002,11 +4782,13 @@
         "type": "function",
         "z": "e987eb50.a7ba78",
         "name": "SonOff Direct (Full STAT",
-        "func": "//flow variables\nvar currentVal = flow.get('currentVal') || 0;\nvar voltageVal = flow.get('voltageVal') || 0;\nvar powerVal = flow.get('powerVal') || 0;\nvar factorVal = flow.get('factorVal') || 0;\nvar reactivePowerVal = flow.get('reactivePowerVal') || 0;\nvar apparentPowerVal = flow.get('apparentPowerVal') || 0;\nvar uptimeVal = flow.get('uptimeVal') || 0;\nvar timeVal = flow.get('timeVal') || 0;\nvar energyTotalVal = flow.get('energyTotalVal') || 0;\nvar energyYesterdayVal = flow.get('energyYesterdayVal') || 0;\nvar energyTodayVal = flow.get('energyTodayVal') || 0;\n\nmsg2 = {};\n\n/*\n    Here I check which proprieties exist.\n    If I interrogate the SonOff directly I'll have a StatusSNS in the proprieties.\n    The telemetry payload doesn't have that propriety. I did this so I can read\n    from multiple sources and output the same date from just one function block\n*/\n\nif('StatusSNS' in msg.payload){\n    factorVal = msg.payload.StatusSNS.ENERGY.Factor;\n    currentVal = msg.payload.StatusSNS.ENERGY.Current;\n    voltageVal = msg.payload.StatusSNS.ENERGY.Voltage;\n\tapparentPowerVal = msg.payload.StatusSNS.ENERGY.ApparentPower;\n\tpowerVal = msg.payload.StatusSNS.ENERGY.Power;\n\treactivePowerVal = msg.payload.StatusSNS.ENERGY.ReactivePower;\n}\nelse if('ENERGY' in msg.payload){\n    factorVal = msg.payload.ENERGY.Factor;\n    currentVal = msg.payload.ENERGY.Current;\n    voltageVal = msg.payload.ENERGY.Voltage;\n    apparentPowerVal = msg.payload.ENERGY.ApparentPower;\n\tpowerVal = msg.payload.ENERGY.Power;\n\treactivePowerVal = msg.payload.ENERGY.ReactivePower;\n\tenergyTotalVal = msg.payload.ENERGY.Total;\n\tenergyYesterdayVal = msg.payload.ENERGY.Yesterday;\n\tenergyTodayVal = msg.payload.ENERGY.Today;\n}\nelse if('UptimeSec' in msg.payload || 'Time' in msg.payload){\n    uptimeVal = msg.payload.UptimeSec;\n    timeVal = msg.payload.Time;\n}\n\n\n//Here I set the flow variables for external use (only this flow)\nflow.set('voltageVal', voltageVal);\nflow.set('currentVal', currentVal);\nflow.set('powerVal', powerVal);\nflow.set('reactivePowerVal', reactivePowerVal);\nflow.set('apparentPowerVal', apparentPowerVal);\nflow.set('factorVal', factorVal);\nflow.set('uptimeVal', uptimeVal);\nflow.set('timeVal', timeVal);\nflow.set('energyTotalVal', energyTotalVal);\nflow.set('energyYesterdayVal', energyYesterdayVal);\nflow.set('energyTodayVal', energyTodayVal);\n\n// Output 1 (for database)\nmsg.payload = {\n    voltage : Number(voltageVal.toFixed(2)),\n    current : Number(currentVal.toFixed(2)),\n    power : Number(powerVal.toFixed(2)),\n    reactivePower : Number(reactivePowerVal.toFixed(2)),\n    apparentPower : Number(apparentPowerVal.toFixed(2)),\n    factor : Number(factorVal.toFixed(2)),\n    energyTotal : Number(energyTotalVal),\n    energyYesterday : Number(energyYesterdayVal),\n    energyToday : Number(energyTodayVal)\n}\n\nmsg2.payload = {\n    uptime : uptimeVal,\n    time : timeVal\n}\nreturn [msg, msg2];",
+        "func": "//flow variables\nvar currentVal = flow.get('currentVal') || 0;\nvar voltageVal = flow.get('voltageVal') || 0;\nvar powerVal = flow.get('powerVal') || 0;\nvar factorVal = flow.get('factorVal') || 0;\nvar reactivePowerVal = flow.get('reactivePowerVal') || 0;\nvar apparentPowerVal = flow.get('apparentPowerVal') || 0;\nvar uptimeVal = flow.get('uptimeVal') || 0;\nvar timeVal = flow.get('timeVal') || 0;\nvar energyTotalVal = flow.get('energyTotalVal') || 0;\nvar energyYesterdayVal = flow.get('energyYesterdayVal') || 0;\nvar energyTodayVal = flow.get('energyTodayVal') || 0;\n\nmsg2 = {};\n\n/*\n    Here I check which proprieties exist.\n    If I interrogate the SonOff directly I'll have a StatusSNS in the proprieties.\n    The telemetry payload doesn't have that propriety. I did this so I can read\n    from multiple sources and output the same date from just one function block\n*/\n\nif('StatusSNS' in msg.payload){\n    factorVal = msg.payload.StatusSNS.ENERGY.Factor;\n    currentVal = msg.payload.StatusSNS.ENERGY.Current;\n    voltageVal = msg.payload.StatusSNS.ENERGY.Voltage;\n\tapparentPowerVal = msg.payload.StatusSNS.ENERGY.ApparentPower;\n\tpowerVal = msg.payload.StatusSNS.ENERGY.Power;\n\treactivePowerVal = msg.payload.StatusSNS.ENERGY.ReactivePower;\n}\nelse if('ENERGY' in msg.payload){\n    factorVal = msg.payload.ENERGY.Factor;\n    currentVal = msg.payload.ENERGY.Current;\n    voltageVal = msg.payload.ENERGY.Voltage;\n    apparentPowerVal = msg.payload.ENERGY.ApparentPower;\n\tpowerVal = msg.payload.ENERGY.Power;\n\treactivePowerVal = msg.payload.ENERGY.ReactivePower;\n\tenergyTotalVal = msg.payload.ENERGY.Total;\n\tenergyYesterdayVal = msg.payload.ENERGY.Yesterday;\n\tenergyTodayVal = msg.payload.ENERGY.Today;\n}\nelse if('UptimeSec' in msg.payload || 'Time' in msg.payload){\n    uptimeVal = msg.payload.UptimeSec;\n    timeVal = msg.payload.Time;\n}\n\n//Here I set the flow variables for external use (only this flow)\nflow.set('voltageVal', voltageVal);\nflow.set('currentVal', currentVal);\nflow.set('powerVal', powerVal);\nflow.set('reactivePowerVal', reactivePowerVal);\nflow.set('apparentPowerVal', apparentPowerVal);\nflow.set('factorVal', factorVal);\nflow.set('uptimeVal', uptimeVal);\nflow.set('timeVal', timeVal);\nflow.set('energyTotalVal', energyTotalVal);\nflow.set('energyYesterdayVal', energyYesterdayVal);\nflow.set('energyTodayVal', energyTodayVal);\n\n// Output 1 (for database)\nmsg.payload = {\n    voltage : Number(voltageVal.toFixed(2)),\n    current : Number(currentVal.toFixed(2)),\n    power : Number(powerVal.toFixed(2)),\n    reactivePower : Number(reactivePowerVal.toFixed(2)),\n    apparentPower : Number(apparentPowerVal.toFixed(2)),\n    factor : Number(factorVal.toFixed(2)),\n    energyTotal : Number(energyTotalVal),\n    energyYesterday : Number(energyYesterdayVal),\n    energyToday : Number(energyTodayVal)\n}\n\nmsg2.payload = {\n    uptime : uptimeVal,\n    time : timeVal\n}\nreturn [msg, msg2];",
         "outputs": 2,
         "noerr": 0,
-        "x": 670,
-        "y": 200,
+        "initialize": "",
+        "finalize": "",
+        "x": 630,
+        "y": 80,
         "wires": [
             [
                 "d233702d.ba8b2",
@@ -5020,11 +4802,10 @@
                 "f2516948.10ae58",
                 "5e697145.af8e5",
                 "f66b8b09.3198c",
-                "fdbf09a2.72ddb8",
-                "550f4339.42b544",
-                "b537b18e.1e8948",
-                "37426923.391d76",
-                "c9c346e3.bbe86"
+                "6ba0c7b2.64fd1",
+                "e952f5e2.7ebae8",
+                "f4694626.88e6a",
+                "7b7c91b8.784b7"
             ],
             []
         ]
@@ -5041,8 +4822,8 @@
         "label": "Energia ieri",
         "format": "{{msg.payload.energyYesterday}} kWh",
         "layout": "row-spread",
-        "x": 1050,
-        "y": 460,
+        "x": 930,
+        "y": 400,
         "wires": []
     },
     {
@@ -5057,18 +4838,8 @@
         "label": "Energia oggi",
         "format": "{{msg.payload.energyToday}} kWh",
         "layout": "row-spread",
-        "x": 1050,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "ef87e7a4.5b6aa8",
-        "type": "comment",
-        "z": "e987eb50.a7ba78",
-        "name": "Pulsante refresh",
-        "info": "",
-        "x": 140,
-        "y": 840,
+        "x": 930,
+        "y": 320,
         "wires": []
     },
     {
@@ -5081,7 +4852,7 @@
         "datatype": "auto",
         "broker": "ee95ae30.7fefe8",
         "x": 200,
-        "y": 140,
+        "y": 80,
         "wires": [
             [
                 "72a56144.6e403"
@@ -5101,21 +4872,8 @@
         "retentionPolicyV18Flux": "",
         "org": "",
         "bucket": "",
-        "x": 1170,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "9c1103bf.2f5dd",
-        "type": "mqtt out",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "cmnd/tasmotaRicaricaNissan/POWER0",
-        "qos": "0",
-        "retain": "false",
-        "broker": "ee95ae30.7fefe8",
-        "x": 920,
-        "y": 920,
+        "x": 1050,
+        "y": 680,
         "wires": []
     },
     {
@@ -5129,52 +4887,13 @@
         "wires": []
     },
     {
-        "id": "77686a88.4c70f4",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "empty payload",
-        "func": "msg.payload = {};\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 640,
-        "y": 920,
-        "wires": [
-            [
-                "9c1103bf.2f5dd"
-            ]
-        ]
-    },
-    {
-        "id": "e8a64a5c.eece88",
-        "type": "trigger",
-        "z": "e987eb50.a7ba78",
-        "name": "STATUS 8 & 11",
-        "op1": "8",
-        "op2": "11",
-        "op1type": "str",
-        "op2type": "str",
-        "duration": "500",
-        "extend": false,
-        "units": "ms",
-        "reset": "",
-        "bytopic": "all",
-        "outputs": 1,
-        "x": 640,
-        "y": 880,
-        "wires": [
-            [
-                "f8ec710.22a979"
-            ]
-        ]
-    },
-    {
         "id": "301f6475.6bdd14",
         "type": "comment",
         "z": "e987eb50.a7ba78",
         "name": "Switch",
         "info": "",
         "x": 110,
-        "y": 980,
+        "y": 820,
         "wires": []
     },
     {
@@ -5187,7 +4906,7 @@
         "retain": "false",
         "broker": "ee95ae30.7fefe8",
         "x": 1100,
-        "y": 1020,
+        "y": 860,
         "wires": []
     },
     {
@@ -5200,7 +4919,7 @@
         "retain": "false",
         "broker": "ee95ae30.7fefe8",
         "x": 1270,
-        "y": 1060,
+        "y": 900,
         "wires": []
     },
     {
@@ -5213,7 +4932,7 @@
         "datatype": "auto",
         "broker": "ee95ae30.7fefe8",
         "x": 200,
-        "y": 400,
+        "y": 740,
         "wires": [
             [
                 "4f07fc90.943eec"
@@ -5230,7 +4949,7 @@
         "datatype": "auto",
         "broker": "ee95ae30.7fefe8",
         "x": 200,
-        "y": 1020,
+        "y": 860,
         "wires": [
             [
                 "1c9cd7ac.771198"
@@ -5256,7 +4975,7 @@
         "payloadType": "num",
         "topic": "hmiSwitch",
         "x": 640,
-        "y": 1100,
+        "y": 900,
         "wires": [
             [
                 "47b4975.6e0d968"
@@ -5275,8 +4994,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "ee95ae30.7fefe8",
-        "x": 910,
-        "y": 1620,
+        "x": 1180,
+        "y": 1120,
         "wires": []
     },
     {
@@ -5286,7 +5005,7 @@
         "name": "Diagnostica",
         "info": "",
         "x": 130,
-        "y": 320,
+        "y": 700,
         "wires": []
     },
     {
@@ -5316,7 +5035,7 @@
         "to": "",
         "reg": false,
         "x": 580,
-        "y": 400,
+        "y": 780,
         "wires": [
             [
                 "f9f3406e.719e2"
@@ -5332,7 +5051,7 @@
         "action": "",
         "pretty": false,
         "x": 410,
-        "y": 400,
+        "y": 780,
         "wires": [
             [
                 "7363b082.ae7c2"
@@ -5348,7 +5067,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 530,
-        "y": 1020,
+        "y": 860,
         "wires": [
             [
                 "91bc66f9.2b5f98"
@@ -5370,7 +5089,7 @@
         "offvalue": "0",
         "offvalueType": "num",
         "x": 680,
-        "y": 1020,
+        "y": 860,
         "wires": [
             [
                 "47b4975.6e0d968"
@@ -5389,8 +5108,8 @@
         "label": "Energia totale",
         "format": "{{msg.payload.energyTotal}} kWh",
         "layout": "row-spread",
-        "x": 1060,
-        "y": 580,
+        "x": 940,
+        "y": 520,
         "wires": []
     },
     {
@@ -5405,8 +5124,8 @@
         "label": "Costo totale",
         "format": "{{msg.payload}} €",
         "layout": "row-spread",
-        "x": 1470,
-        "y": 660,
+        "x": 1350,
+        "y": 600,
         "wires": []
     },
     {
@@ -5428,8 +5147,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1060,
-        "y": 660,
+        "x": 940,
+        "y": 600,
         "wires": [
             [
                 "832964b1.d133d8"
@@ -5448,8 +5167,8 @@
         "label": "Costo totale",
         "format": "{{msg.payload}} €",
         "layout": "row-spread",
-        "x": 1470,
-        "y": 700,
+        "x": 1350,
+        "y": 640,
         "wires": []
     },
     {
@@ -5540,7 +5259,7 @@
         "bytopic": "all",
         "outputs": 1,
         "x": 1020,
-        "y": 1060,
+        "y": 900,
         "wires": [
             [
                 "c52eb7a.f330548"
@@ -5615,67 +5334,17 @@
         "height": 0,
         "wrap": true,
         "passthru": true,
-        "topic": "",
+        "topic": "percToCharge",
+        "topicType": "str",
         "format": "{{value}} %",
         "min": 0,
         "max": "100",
         "step": "10",
-        "x": 330,
-        "y": 1240,
+        "x": 470,
+        "y": 1120,
         "wires": [
             [
-                "90659800.6af918",
-                "864575db.8f2878",
-                "10e5d09e.22d8f7",
-                "150daf55.592a19",
-                "64cf5bb.64248a4"
-            ]
-        ]
-    },
-    {
-        "id": "90659800.6af918",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "Calc Charge Data",
-        "func": "var energyStartChargeVal = flow.get('energyTotalVal');\nvar energyStopChargeVal = Number((40.0 / 100.0 * msg.payload + energyStartChargeVal).toFixed(2));\nflow.set('energyStartChargeVal', energyStartChargeVal);\nflow.set('energyStopChargeVal', energyStopChargeVal);\nflow.set('energyToChargeVal', energyStopChargeVal-energyStartChargeVal);\nflow.set('energyPercToChargeVal', msg.payload);\nif(msg.payload > 0){\n    flow.set('chargeComplete', false);\n}",
-        "outputs": 0,
-        "noerr": 0,
-        "x": 530,
-        "y": 1260,
-        "wires": []
-    },
-    {
-        "id": "3095758a.6ff95a",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "d": true,
-        "name": "Charge Control v3.0",
-        "func": "const MAX_BATTERY_CAPACITY = 40.0;\nconst ENERGY_1_PERC = MAX_BATTERY_CAPACITY / 100.0;\n\nfunction ChargerController(){\n    this.isCharged = false;\n    this.energyPercToCharge = 0;\n    this.energyToCharge = 0;\n    this.energyValue = 0;\n    this.chargeValAtStart = 0;\n    this.chargeValAtStop = 0;\n    \n    this.update = function(){\n        this.energyValue = flow.get('energyTotalVal') || 0;\n        this.energyPercToCharge = flow.get('energyPercToChargeVal');\n    }\n    this.startCharge = function(){\n        this.isCharged = false;\n        this.energyPercToCharge = flow.get('energyPercToChargeVal');\n        this.chargeValAtStart =  this.energyValue;\n        this.chargeValAtStop = Number((ENERGY_1_PERC * this.energyPercToCharge + this.chargeValAtStart).toFixed(2));\n        msg.rce = \"CHARGE CONTROLLER: Ricarica avviata\";\n    }\n    this.stopCharge = function(){\n        this.isCharged = true;\n        this.chargeValAtStop =  this.energyValue;\n        msg.rce = \"CHARGE CONTROLLER: Ricarica arrestata: Caricati \" + (this.energyValue - this.chargeValAtStart) + \"kWh\";\n    }\n}\n\nconst STANDBY_POWER = 5;\nconst POWER_CHARGING_STATE = 2000;\n\nclass PowerMonitor{\n    this.powerVal = 0;\n    this.isBalancing = false\n    this.isCharging = false;\n    this.isStandby = false;\n    this.update = function(){\n        this.powerVal = flow.get('powerVal') || 0;\n        if (powerVal < STANDBY_POWER){\n            this.isBalancing = false\n            this.isCharging = false;\n            this.isStandby = true;\n        }\n        else if(powerVal > POWER_CHARGING_STATE){\n            this.isBalancing = false\n            this.isCharging = true;\n            this.isStandby = false;\n        }\n        else{\n            this.isBalancing = true\n            this.isCharging = true;\n            this.isStandby = false;\n        }\n    }\n}\n\n\nvar chargerController =  new ChargerController();\nchargerController.update();\n\nif (chargerController.isCharged){\n    chargerController.stopCharge().update();\n    msg.payload = 0;\n}\nelse if(chargerController.energyPercToCharge >0){\n    chargerController.startCharge().update();\n    msg.payload = 1;\n}\n\nvar powerMonitor = context.get('powerMonitor') || new PowerMonitor();\nvar waitingLoad = context.get('waitingLoad') || 0;\nvar timoutWaitingLoad = context.get('timoutWaitingLoad') || 0;\n\nif (powerMonitor.isStandby) {\n    if (powerMonitor.powerVal >0){\n        if(!waitingLoad){\n        timoutWaitingLoad = setTimeout(function(){\n\t\t    msg.rce = \"RICARICA NISSAN: Sgancio per assenza carico collegato\";\n            msg.payload = 0;\n            waitingLoad = 0;\n            node.send(msg);}, 300000);}\n        waitingLoad = 1;\n\t\tcontext.set('timeoutForLoadWaiting', timeoutForLoadWaiting);\n    }\n    else{\n        clearTimeout(timoutWaitingLoad);\n        waitingLoad = 0;\n    }\n}\n\ncontext.set('powerMonitor', powerMonitor);\ncontext.set('chargerController', chargerController);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 580,
-        "y": 1760,
-        "wires": [
-            [
-                "9664fd3c.68c368"
-            ]
-        ]
-    },
-    {
-        "id": "a0c1da59.eb17c",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "calcChargeRemaining",
-        "func": "var energyStartChargeVal = flow.get('energyStartChargeVal');\nvar energyStopChargeVal = flow.get('energyStopChargeVal');\nvar energyTotalVal = flow.get('energyTotalVal');\nvar relay = flow.get('relayStatus');\n\n//return percentage \nvar percentage = (energyTotalVal-energyStartChargeVal) / (energyStopChargeVal-energyStartChargeVal) * 100;\nif (percentage < 0 || isNaN(percentage)){\n    percentage = 0;\n} else if (percentage > 100){\n    percentage = 100;\n}\nflow.set('percentageVal', percentage);\nmsg.payload = Math.round(percentage);\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 500,
-        "y": 1540,
-        "wires": [
-            [
-                "2c1b8a7a.e7bb66"
+                "ce1e9058.cef4e"
             ]
         ]
     },
@@ -5684,7 +5353,7 @@
         "type": "ui_level",
         "z": "e987eb50.a7ba78",
         "group": "4f75689c.e4dd2",
-        "order": 11,
+        "order": 10,
         "width": 0,
         "height": 0,
         "name": "",
@@ -5715,75 +5384,10 @@
         "hideValue": false,
         "tickmode": "segments",
         "peakmode": false,
+        "property": "payload",
         "peaktime": 3000,
-        "x": 690,
-        "y": 1540,
-        "wires": []
-    },
-    {
-        "id": "864575db.8f2878",
-        "type": "trigger",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "op1": "",
-        "op2": "energyStopChargeVal",
-        "op1type": "nul",
-        "op2type": "flow",
-        "duration": "250",
-        "extend": false,
-        "units": "ms",
-        "reset": "",
-        "bytopic": "all",
-        "outputs": 1,
-        "x": 520,
-        "y": 1300,
-        "wires": [
-            [
-                "78217602.71f5"
-            ]
-        ]
-    },
-    {
-        "id": "fd105f8.dbe9ea",
-        "type": "ui_button",
-        "z": "e987eb50.a7ba78",
-        "name": "Refresh icon",
-        "group": "4f75689c.e4dd2",
-        "order": 3,
-        "width": 2,
-        "height": 1,
-        "passthru": true,
-        "label": "",
-        "tooltip": "Aggiorna dati",
-        "color": "",
-        "bgcolor": "",
-        "icon": "refresh",
-        "payload": "8",
-        "payloadType": "str",
-        "topic": "",
-        "x": 430,
-        "y": 920,
-        "wires": [
-            [
-                "77686a88.4c70f4",
-                "e8a64a5c.eece88"
-            ]
-        ]
-    },
-    {
-        "id": "78217602.71f5",
-        "type": "ui_text",
-        "z": "e987eb50.a7ba78",
-        "group": "81745724.cb54f8",
-        "order": 8,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Fine ricarica",
-        "format": "{{msg.payload}} kWh",
-        "layout": "row-spread",
-        "x": 690,
-        "y": 1300,
+        "x": 950,
+        "y": 1280,
         "wires": []
     },
     {
@@ -5945,42 +5549,19 @@
         "wires": []
     },
     {
-        "id": "10e5d09e.22d8f7",
-        "type": "trigger",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "op1": "",
-        "op2": "energyToChargeVal",
-        "op1type": "nul",
-        "op2type": "flow",
-        "duration": "250",
-        "extend": false,
-        "units": "ms",
-        "reset": "",
-        "bytopic": "all",
-        "outputs": 1,
-        "x": 520,
-        "y": 1340,
-        "wires": [
-            [
-                "bd6613f4.4f9a58"
-            ]
-        ]
-    },
-    {
         "id": "48fccdbf.62ffc4",
         "type": "ui_text",
         "z": "e987eb50.a7ba78",
         "group": "4f75689c.e4dd2",
-        "order": 9,
+        "order": 8,
         "width": 0,
         "height": 0,
         "name": "",
         "label": "Energia da ricaricare",
-        "format": "{{msg.payload.toFixed(2)}} kW",
+        "format": "{{msg.energyToCharge}} kWh",
         "layout": "row-spread",
-        "x": 960,
-        "y": 1340,
+        "x": 1000,
+        "y": 1200,
         "wires": []
     },
     {
@@ -5995,8 +5576,8 @@
         "label": "Energia oggi",
         "format": "{{msg.payload.energyToday}} kWh",
         "layout": "row-spread",
-        "x": 1050,
-        "y": 420,
+        "x": 930,
+        "y": 360,
         "wires": []
     },
     {
@@ -6011,43 +5592,22 @@
         "label": "Energia ieri",
         "format": "{{msg.payload.energyYesterday}} kWh",
         "layout": "row-spread",
-        "x": 1050,
-        "y": 500,
+        "x": 930,
+        "y": 440,
         "wires": []
-    },
-    {
-        "id": "fdbf09a2.72ddb8",
-        "type": "trigger",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "op1": "",
-        "op2": "true",
-        "op1type": "nul",
-        "op2type": "bool",
-        "duration": "250",
-        "extend": false,
-        "units": "ms",
-        "reset": "",
-        "bytopic": "all",
-        "outputs": 1,
-        "x": 1060,
-        "y": 620,
-        "wires": [
-            [
-                "7b7c91b8.784b7"
-            ]
-        ]
     },
     {
         "id": "7b7c91b8.784b7",
         "type": "function",
         "z": "e987eb50.a7ba78",
         "name": "",
-        "func": "var energyYesterdayVal = flow.get('energyYesterdayVal');\nvar energyTodayVal = flow.get('energyTodayVal');\nmsg.payload = Number(energyYesterdayVal + energyTodayVal).toFixed(1);\nreturn msg;",
+        "func": "msg.payload = Number(msg.payload.energyYesterday + msg.payload.energyToday).toFixed(2);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1210,
-        "y": 620,
+        "initialize": "",
+        "finalize": "",
+        "x": 920,
+        "y": 560,
         "wires": [
             [
                 "ad760248.d17128"
@@ -6064,49 +5624,27 @@
         "height": 0,
         "name": "",
         "label": "Energia ultime 24H",
-        "format": "{{msg.payload.toFixed(2)}} kWh",
+        "format": "{{msg.payload}} kWh",
         "layout": "row-spread",
-        "x": 1490,
-        "y": 620,
+        "x": 1130,
+        "y": 560,
         "wires": []
-    },
-    {
-        "id": "150daf55.592a19",
-        "type": "trigger",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "op1": "",
-        "op2": "energyToChargeVal",
-        "op1type": "nul",
-        "op2type": "flow",
-        "duration": "250",
-        "extend": false,
-        "units": "ms",
-        "reset": "",
-        "bytopic": "all",
-        "outputs": 1,
-        "x": 520,
-        "y": 1420,
-        "wires": [
-            [
-                "9d9dae1b.65f218"
-            ]
-        ]
     },
     {
         "id": "430bfe57.9b21",
         "type": "ui_text",
         "z": "e987eb50.a7ba78",
+        "d": true,
         "group": "4f75689c.e4dd2",
-        "order": 10,
+        "order": 9,
         "width": 0,
         "height": 0,
         "name": "",
         "label": "Costo stimato",
         "format": "{{msg.payload}} €",
         "layout": "row-spread",
-        "x": 940,
-        "y": 1420,
+        "x": 1120,
+        "y": 1320,
         "wires": []
     },
     {
@@ -6260,11 +5798,11 @@
         "z": "e987eb50.a7ba78",
         "name": "Reset",
         "group": "4f75689c.e4dd2",
-        "order": 5,
+        "order": 3,
         "width": "2",
         "height": "1",
         "passthru": true,
-        "label": "",
+        "label": "FERMA RICARICA",
         "tooltip": "Reset ricarica",
         "color": "",
         "bgcolor": "",
@@ -6272,11 +5810,13 @@
         "payload": "0",
         "payloadType": "num",
         "topic": "",
-        "x": 170,
-        "y": 1280,
+        "topicType": "str",
+        "x": 190,
+        "y": 1200,
         "wires": [
             [
-                "ae16a399.4da198"
+                "ae16a399.4da198",
+                "cf08aa19.54263"
             ]
         ],
         "outputLabels": [
@@ -6289,11 +5829,11 @@
         "z": "e987eb50.a7ba78",
         "name": "Full",
         "group": "4f75689c.e4dd2",
-        "order": 6,
+        "order": 4,
         "width": "2",
         "height": "1",
         "passthru": true,
-        "label": "",
+        "label": "100%",
         "tooltip": "Ricarica 100%",
         "color": "",
         "bgcolor": "",
@@ -6301,8 +5841,9 @@
         "payload": "100",
         "payloadType": "num",
         "topic": "",
-        "x": 170,
-        "y": 1320,
+        "topicType": "str",
+        "x": 190,
+        "y": 1160,
         "wires": [
             [
                 "ae16a399.4da198"
@@ -6370,71 +5911,6 @@
                 "6d756d07.55bcb4"
             ]
         ]
-    },
-    {
-        "id": "64cf5bb.64248a4",
-        "type": "within-time-switch",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "nameInt": "",
-        "positionConfig": "ea6aed1e.d46f38",
-        "startTime": "07:00",
-        "startTimeType": "entered",
-        "startOffset": 0,
-        "startOffsetType": "none",
-        "startOffsetMultiplier": 60000,
-        "endTime": "23:00",
-        "endTimeType": "entered",
-        "endOffset": 0,
-        "endOffsetType": "none",
-        "endOffsetMultiplier": 60000,
-        "timeDays": "1,2,3,4,5,6",
-        "timeOnlyOddDays": false,
-        "timeOnlyEvenDays": false,
-        "timeMonths": "*",
-        "timedatestart": "",
-        "timedateend": "",
-        "propertyStart": "",
-        "propertyStartType": "none",
-        "propertyStartCompare": "true",
-        "propertyStartThreshold": "",
-        "propertyStartThresholdType": "num",
-        "startTimeAlt": "",
-        "startTimeAltType": "entered",
-        "startOffsetAlt": 0,
-        "startOffsetAltType": "none",
-        "startOffsetAltMultiplier": 60000,
-        "propertyEnd": "",
-        "propertyEndType": "none",
-        "propertyEndCompare": "true",
-        "propertyEndThreshold": "",
-        "propertyEndThresholdType": "num",
-        "endTimeAlt": "",
-        "endTimeAltType": "entered",
-        "endOffsetAlt": 0,
-        "endOffsetAltType": "none",
-        "endOffsetAltMultiplier": 60000,
-        "tsCompare": "0",
-        "x": 510,
-        "y": 1220,
-        "wires": [
-            [
-                "ddd05b95.37f6c8"
-            ],
-            [
-                "77e97bc.f94c384"
-            ]
-        ]
-    },
-    {
-        "id": "955cf66b.a03a6",
-        "type": "comment",
-        "z": "e987eb50.a7ba78",
-        "name": "Avvio ricarica",
-        "info": "",
-        "x": 110,
-        "y": 1160,
-        "wires": []
     },
     {
         "id": "5ccc4ea0.5d25f8",
@@ -6607,19 +6083,6 @@
         "wires": []
     },
     {
-        "id": "735951a0.c00aa8",
-        "type": "mqtt out",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "rasYard/ricaricaNissan/rce",
-        "qos": "0",
-        "retain": "false",
-        "broker": "ee95ae30.7fefe8",
-        "x": 1170,
-        "y": 1200,
-        "wires": []
-    },
-    {
         "id": "36afdfa8.2f71c8",
         "type": "function",
         "z": "d4fae0b8.1d7718",
@@ -6636,22 +6099,6 @@
         ]
     },
     {
-        "id": "550f4339.42b544",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "Time left",
-        "func": "var energyStopChargeVal = flow.get('energyStopChargeVal');\nvar energyLeft = energyStopChargeVal - msg.payload.energyTotal;\nvar timeLeft = energyLeft * 1000 / msg.payload.power;\nvar relayStatus = flow.get('relayStatus');\n\nif (timeLeft <= 0 || relayStatus === \"OFF\"){\n    msg.payload = \"Ricarica completata\";\n} else{\n    var hourLeft = Math.floor(timeLeft);\n    var minuteLeft = timeLeft - Math.floor(timeLeft);\n    minuteLeft = 60 * minuteLeft;\n    msg.payload = hourLeft + \"h \" + minuteLeft.toFixed(0) + \"m\";\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1040,
-        "y": 780,
-        "wires": [
-            [
-                "808b32d8.8ea79"
-            ]
-        ]
-    },
-    {
         "id": "808b32d8.8ea79",
         "type": "ui_text",
         "z": "e987eb50.a7ba78",
@@ -6661,10 +6108,10 @@
         "height": 2,
         "name": "",
         "label": "Tempo rimasto",
-        "format": "{{msg.payload}}",
+        "format": "{{msg.remainingTime}}",
         "layout": "row-spread",
-        "x": 1260,
-        "y": 780,
+        "x": 980,
+        "y": 1160,
         "wires": []
     },
     {
@@ -6846,7 +6293,7 @@
         "peakmode": false,
         "property": "payload",
         "peaktime": "3000",
-        "x": 1390,
+        "x": 1190,
         "y": 160,
         "wires": []
     },
@@ -7140,6 +6587,8 @@
         "func": "var temperatureVal;\nvar humidityVal;\nvar pressureVal;\nvar dewpointVal\n\ntemperatureVal = msg.payload.BME280.Temperature;\nhumidityVal = msg.payload.BME280.Humidity;\npressureVal = msg.payload.BME280.Pressure;\ndewpointVal = msg.payload.BME280.DewPoint;\n\nmsg.payload = {\n    temperature : temperatureVal,\n    humidity : humidityVal,\n    pressure : pressureVal,\n    dewpoint : dewpointVal\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 660,
         "y": 160,
         "wires": [
@@ -7888,23 +7337,6 @@
         ]
     },
     {
-        "id": "5d1f23c2.4035dc",
-        "type": "mqtt in",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "rasHome/measures/refreshOnBoot",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "ee95ae30.7fefe8",
-        "x": 200,
-        "y": 880,
-        "wires": [
-            [
-                "4434b330.12340c"
-            ]
-        ]
-    },
-    {
         "id": "46855caf.94963c",
         "type": "mqtt in",
         "z": "73b7c891.499c78",
@@ -8043,8 +7475,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "ee95ae30.7fefe8",
-        "x": 720,
-        "y": 460,
+        "x": 560,
+        "y": 440,
         "wires": []
     },
     {
@@ -8058,20 +7490,6 @@
         "broker": "ee95ae30.7fefe8",
         "x": 1180,
         "y": 1280,
-        "wires": []
-    },
-    {
-        "id": "bbb70943.d221f",
-        "type": "mqtt out",
-        "z": "af47c860.21273",
-        "d": true,
-        "name": "",
-        "topic": "rasYard/solarNode/telegramMsgOut",
-        "qos": "0",
-        "retain": "false",
-        "broker": "ee95ae30.7fefe8",
-        "x": 400,
-        "y": 480,
         "wires": []
     },
     {
@@ -8294,70 +7712,6 @@
         ]
     },
     {
-        "id": "2fe8e937.5d54ae",
-        "type": "mqtt out",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "rasYard/ricaricaNissan/POWER/richiestaRicarica",
-        "qos": "0",
-        "retain": "false",
-        "broker": "ee95ae30.7fefe8",
-        "x": 1080,
-        "y": 1240,
-        "wires": []
-    },
-    {
-        "id": "49b9677e.fd26b8",
-        "type": "mqtt in",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "rasYard/ricaricaNissan/POWER/richiestaRicarica",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "ee95ae30.7fefe8",
-        "x": 240,
-        "y": 1060,
-        "wires": [
-            [
-                "64aef12a.ee3378"
-            ]
-        ]
-    },
-    {
-        "id": "84f3b0e6.754d",
-        "type": "change",
-        "z": "e987eb50.a7ba78",
-        "name": "payload2rce",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "rce",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "rce",
-                "pt": "flow",
-                "to": "rce",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 970,
-        "y": 1200,
-        "wires": [
-            [
-                "735951a0.c00aa8"
-            ]
-        ]
-    },
-    {
         "id": "7875fa35.fbb004",
         "type": "mqtt in",
         "z": "d4fae0b8.1d7718",
@@ -8401,7 +7755,7 @@
         "to": "",
         "reg": false,
         "x": 1010,
-        "y": 1100,
+        "y": 940,
         "wires": [
             [
                 "cf993547.ac96b"
@@ -8418,36 +7772,7 @@
         "retain": "false",
         "broker": "ee95ae30.7fefe8",
         "x": 1210,
-        "y": 1100,
-        "wires": []
-    },
-    {
-        "id": "64aef12a.ee3378",
-        "type": "json",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 490,
-        "y": 1060,
-        "wires": [
-            [
-                "47b4975.6e0d968"
-            ]
-        ]
-    },
-    {
-        "id": "32ebd609.8aa2c2",
-        "type": "mqtt out",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "rasYard/ricaricaNissan/POWER/richiestaRicarica",
-        "qos": "0",
-        "retain": "false",
-        "broker": "ee95ae30.7fefe8",
-        "x": 890,
-        "y": 1580,
+        "y": 940,
         "wires": []
     },
     {
@@ -8476,86 +7801,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 710,
-        "y": 1620,
+        "x": 970,
+        "y": 1120,
         "wires": [
             [
                 "1e3ac765.3fa791"
-            ]
-        ]
-    },
-    {
-        "id": "98f9c3e.8fbca4",
-        "type": "mqtt out",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "rasYard/ricaricaNissan/dataReceived",
-        "qos": "",
-        "retain": "",
-        "broker": "ee95ae30.7fefe8",
-        "x": 690,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "a01d8694.b2bef",
-        "type": "change",
-        "z": "e987eb50.a7ba78",
-        "name": "blinkOnReceive",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "true",
-                "tot": "bool"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 600,
-        "y": 100,
-        "wires": [
-            [
-                "98f9c3e.8fbca4"
-            ]
-        ]
-    },
-    {
-        "id": "367babb9.7ede24",
-        "type": "mqtt in",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "topic": "rasYard/ricaricaNissan/dataReceived",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "ee95ae30.7fefe8",
-        "x": 180,
-        "y": 1540,
-        "wires": [
-            [
-                "a0c1da59.eb17c",
-                "b38c22b3.521338"
-            ]
-        ]
-    },
-    {
-        "id": "ddd05b95.37f6c8",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "Calculate delay to F2",
-        "func": "const ON = 1;\nconst OFF = 0;\n\nvar currentdate = new Date();\nvar triggerDate = new Date();\nvar timedOutActivation;\ntriggerDate.setHours(23);\ntriggerDate.setMinutes(0);\n\nfunction startCharge(){\n    return msg.payload >= 1;\n}\nfunction isEconomyTime(){\n    return currentdate > triggerDate;\n}\n\nif (startCharge()){\n    if (isEconomyTime()){\n        msg.rce = \"Avvio ricarica\"\n        msg.payload = ON;\n    }\n    else{\n        var delay = triggerDate - currentdate;\n        msg.payload = OFF;\n        msg.rce = \"Ricarica prenotata. Inserzione tra \" + ((delay)/60000).toFixed(0) + \"Minuti\";\n        //node.send(msg);\n        timedOutActivation = setTimeout(function(){\n            msg.payload = ON;\n            msg.rce = \"Avvio ricarica prenotata\";\n            node.send(msg); // setTimeout is an async function\n        }, delay);\n    }\n}\nelse {\n    msg.rce = \"Prenotazione ricarica annullata\";\n    clearTimeout(timedOutActivation);\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 760,
-        "y": 1200,
-        "wires": [
-            [
-                "2fe8e937.5d54ae",
-                "84f3b0e6.754d"
             ]
         ]
     },
@@ -8568,7 +7818,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 840,
-        "y": 1060,
+        "y": 900,
         "wires": [
             [
                 "798b25a1.311f3c",
@@ -8595,22 +7845,6 @@
         ]
     },
     {
-        "id": "77e97bc.f94c384",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "ON",
-        "func": "if (msg.payload >= 1){\n    msg.payload = 1;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 710,
-        "y": 1240,
-        "wires": [
-            [
-                "2fe8e937.5d54ae"
-            ]
-        ]
-    },
-    {
         "id": "832964b1.d133d8",
         "type": "function",
         "z": "e987eb50.a7ba78",
@@ -8618,8 +7852,8 @@
         "func": "var energia = msg.payload;\nconst PREZZO_MEDIO_KW = 0.18;\n\nvar costoTotale = energia * PREZZO_MEDIO_KW;\nmsg.payload = costoTotale.toFixed(2);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1270,
-        "y": 660,
+        "x": 1150,
+        "y": 600,
         "wires": [
             [
                 "f347d7d1.57c6b",
@@ -8631,12 +7865,15 @@
         "id": "9d9dae1b.65f218",
         "type": "function",
         "z": "e987eb50.a7ba78",
+        "d": true,
         "name": "energy2Money",
-        "func": "var energia = msg.payload;\nconst PREZZO_MEDIO_KW = 0.18;\n\nvar costoTotale = energia * 0.18;\nmsg.payload = costoTotale.toFixed(2);\n\nreturn msg;",
+        "func": "const PREZZO_MEDIO_KW = 0.22;\n\nvar costoTotale = msg.payload * 0.18;\nmsg.payload = costoTotale.toFixed(2);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 700,
-        "y": 1420,
+        "initialize": "",
+        "finalize": "",
+        "x": 940,
+        "y": 1320,
         "wires": [
             [
                 "430bfe57.9b21"
@@ -8853,56 +8090,6 @@
             [
                 "49be6c5.5b61f94",
                 "e4121ccc.4f7ce8"
-            ]
-        ]
-    },
-    {
-        "id": "b537b18e.1e8948",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "func": "msg.payload = msg.payload.power.toFixed(0)\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1250,
-        "y": 220,
-        "wires": [
-            [
-                "6f7e6b6a.86c174",
-                "714fe196.c8d6d",
-                "9dbfdd80.edef5"
-            ]
-        ]
-    },
-    {
-        "id": "37426923.391d76",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "func": "msg.payload = msg.payload.voltage.toFixed(0)\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1030,
-        "y": 60,
-        "wires": [
-            [
-                "7e7193ee.c7c72c"
-            ]
-        ]
-    },
-    {
-        "id": "c9c346e3.bbe86",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "func": "msg.payload = msg.payload.current.toFixed(0)\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1010,
-        "y": 160,
-        "wires": [
-            [
-                "cd25c7c6.6062d"
             ]
         ]
     },
@@ -9575,7 +8762,7 @@
         "z": "7aa2da03.bd1f7c",
         "name": "Pulsante switch interruttore",
         "group": "c66d2e37.c9d248",
-        "order": 3,
+        "order": 1,
         "width": 5,
         "height": 1,
         "passthru": false,
@@ -9702,25 +8889,6 @@
         "wires": []
     },
     {
-        "id": "bd6613f4.4f9a58",
-        "type": "calculator",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "inputMsgField": "payload",
-        "outputMsgField": "payload",
-        "operation": "rdec",
-        "constant": "1",
-        "round": false,
-        "decimals": "0",
-        "x": 720,
-        "y": 1340,
-        "wires": [
-            [
-                "48fccdbf.62ffc4"
-            ]
-        ]
-    },
-    {
         "id": "c0faa362.abbbb",
         "type": "tuya-smart-device-generic",
         "z": "f2a638ae.d93ca8",
@@ -9805,24 +8973,6 @@
         "wires": [
             [
                 "36afdfa8.2f71c8"
-            ]
-        ]
-    },
-    {
-        "id": "883db943.00f6c",
-        "type": "subflow:c0642d23.ec7808",
-        "z": "af47c860.21273",
-        "d": true,
-        "name": "",
-        "env": [],
-        "x": 140,
-        "y": 480,
-        "wires": [
-            [
-                "bbb70943.d221f"
-            ],
-            [
-                "bbb70943.d221f"
             ]
         ]
     },
@@ -10041,10 +9191,12 @@
         "id": "34f99bb7.6a8a24",
         "type": "function",
         "z": "5b5ae0eb.cb95b",
-        "name": "Rafferddamento Invernale Cucina",
-        "func": "var temperature = msg.payload.temperature || context.get('temperature');\nvar humidity = msg.payload.humidity ||  context.get('humidity');\n\nvar mode = msg.payload.mode || context.get('mode');\nvar setpoint = msg.payload.setpoint || context.get('setpoint');\n    \nfunction temperatureIsValid(){\n    return (temperature > 0) && (temperature !== undefined);\n}\n\nif ((mode == \"cool\")){\n    if (temperature >= setpoint){\n        msg.payload = 1;\n        msg.rce = \"TERMOSTATO: soglia avvio raffreddamento\";\n    }\n    else if(temperature < setpoint){\n        msg.payload = 0;\n        msg.rce = \"TERMOSTATO: soglia arresto raffreddamento\";\n    }\n}\nelse if (mode == \"off\"){\n    msg.payload = 0;\n    msg.rce = \"TERMOSTATO: termostato disattivato\";\n}\n\ncontext.set('mode', mode);\ncontext.set('setpoint', setpoint);\ncontext.set('temperature', temperature);\n\nreturn msg;",
+        "name": "RaffreddamentoInvernale Cucina",
+        "func": "var temperature = msg.payload.temperature || context.get('temperature');\nvar humidity = msg.payload.humidity ||  context.get('humidity');\n\nvar mode = msg.payload.mode || context.get('mode');\nvar setpoint = msg.payload.setpoint || context.get('setpoint');\n\nconst HYSTERESIS = 1.0;\n\nfunction temperatureIsValid(){\n    return (temperature > 0) && (temperature !== undefined);\n}\n\nif ((mode == \"cool\")){\n    if (temperature >= setpoint){\n        msg.payload = 1;\n        msg.rce = \"TERMOSTATO: soglia avvio raffreddamento\";\n    }\n    else if(temperature < (setpoint - HYSTERESIS)){\n        msg.payload = 0;\n        msg.rce = \"TERMOSTATO: soglia arresto raffreddamento\";\n    }\n}\nelse if (mode == \"off\"){\n    msg.payload = 0;\n    msg.rce = \"TERMOSTATO: termostato disattivato\";\n}\n\ncontext.set('mode', mode);\ncontext.set('setpoint', setpoint);\ncontext.set('temperature', temperature);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 960,
         "y": 380,
         "wires": [
@@ -10096,8 +9248,8 @@
         "type": "ui_button",
         "z": "5b5ae0eb.cb95b",
         "name": "Pulsante switch interruttore",
-        "group": "7c9364c.4aa5a1c",
-        "order": 1,
+        "group": "261dd92c.ffff5e",
+        "order": 5,
         "width": 5,
         "height": 1,
         "passthru": false,
@@ -10128,6 +9280,8 @@
         "func": "if ('setpoint' in msg.payload){\n    msg.payload = msg.payload.setpoint;\n    return msg;\n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 890,
         "y": 320,
         "wires": [
@@ -10160,6 +9314,8 @@
         "func": "const SETPOINT_MIN = 15.0;\nconst SETPOINT_MAX = 30.0;\n\nvar temperature = msg.payload.DHT11.Temperature;\nvar humidity = msg.payload.DHT11.Humidity;\nmsg.payload = {};\nmsg.payload.temperature = temperature;\nmsg.payload.humidity = humidity;\nmsg.payload.setpointLow = SETPOINT_MIN;\nmsg.payload.setpointHigh = SETPOINT_MAX;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 490,
         "y": 280,
         "wires": [
@@ -10176,6 +9332,8 @@
         "func": "var status = msg.payload;\nmsg.payload = {};\n\nif(status === \"ON\"){\n    msg.payload.mode = \"cool\";\n}\nelse if(status === \"OFF\"){\n    msg.payload.mode = \"off\";\n}\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 470,
         "y": 240,
         "wires": [
@@ -10192,7 +9350,9 @@
         "func": "var setpoint = msg.payload;\nmsg.payload = {};\nmsg.payload.setpoint = setpoint;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 470,
+        "initialize": "",
+        "finalize": "",
+        "x": 490,
         "y": 320,
         "wires": [
             [
@@ -10266,8 +9426,8 @@
         "z": "e987eb50.a7ba78",
         "name": "Gestione ricarica",
         "info": "",
-        "x": 120,
-        "y": 1500,
+        "x": 140,
+        "y": 1000,
         "wires": []
     },
     {
@@ -10379,94 +9539,6 @@
         ]
     },
     {
-        "id": "b38c22b3.521338",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "Charge Control v2.1",
-        "func": "const MINUTE_FOR_BATTERY_BALANCING = 60;\nconst STANDBY_POWER = 5;\nconst ENERGY_1_PERC = 0.4;\n\nvar energyTotalVal = flow.get('energyTotalVal');\nvar energyStartChargeVal = flow.get('energyStartChargeVal') || 0;\nvar energyStopChargeVal = flow.get('energyStopChargeVal') || 0;\nvar energyToChargeVal = flow.get('energyToChargeVal') || 0;\nvar energyPercToChargeVal = flow.get('energyPercToChargeVal');\nvar relayStatus = flow.get('relayStatus');\nvar powerVal = flow.get('powerVal');\n\nvar timeStartBalancing = context.get('timeStartBalancing');\nvar batteryBalancingStarted = context.get('batteryBalancingStarted');\nvar timeoutForBalancing;\n\nfunction isCharged(){\n    return energyTotalVal >= energyStopChargeVal;\n}\nfunction isStandby(){\n    return powerVal < STANDBY_POWER;\n}\nfunction isBalanced(){\n    now = new Date();\n    \n\t\tcontext.set('watchdogBalancing', now);\n\t\tcontext.set('difBalancing', now - timeStartBalancing);\n    return ((now - timeStartBalancing) > (MINUTE_FOR_BATTERY_BALANCING * 60000));\n}\nfunction balanceBattery(){\n\tif (batteryBalancingStarted){\n\t\tif (isBalanced()){\n\t\t    msg.payload = 0;\n\t\t\tvar energyCharged = energyTotalVal - energyStartChargeVal;\n\t\t\tvar energyPercCharged = energyCharged / ENERGY_1_PERC;\n\t\t\tmsg.rce = \"RICARICA NISSAN: Ricarica e bilanciamento batteria completato (\" + energyCharged.toFixed(2) + \" kWh/\" + energyPercCharged + \"%)\";\n\t\t    node.send(msg);\n\t\t}\n\t}\n\telse{\n\t\ttimeStartBalancing = new Date();\n        context.set('timeStartBalancing', timeStartBalancing);\n        context.set('batteryBalancingStarted', true);\n        msg.rce = \"RICARICA NISSAN: Avvio bilanciamento batteria\";\n        node.send(msg);\n\t}\n}\n\n\nif(relayStatus === \"ON\") {\n    if (isCharged()) {\n        msg.rce = \"RICARICA NISSAN: Ricarica completa (\" + energyToChargeVal + \" kWh/\" + energyPercToChargeVal + \"%)\";\n        msg.payload = 0;\n        node.send(msg);\n    }\n    else if (isStandby()) {\n\t\ttimeoutForBalancing = setTimeout(balanceBattery(), 60000);\n    }\n}\nelse{\n    context.set('batteryBalancingStarted', false);\n    clearTimeout(timeoutForBalancing);\n}\nreturn;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 480,
-        "y": 1620,
-        "wires": [
-            [
-                "40567a2e.45714c"
-            ]
-        ]
-    },
-    {
-        "id": "b5017095.10f46",
-        "type": "inject",
-        "z": "e987eb50.a7ba78",
-        "d": true,
-        "name": "",
-        "repeat": "10",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 310,
-        "y": 1780,
-        "wires": [
-            [
-                "a34afe93.7b6548"
-            ]
-        ]
-    },
-    {
-        "id": "9664fd3c.68c368",
-        "type": "debug",
-        "z": "e987eb50.a7ba78",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 820,
-        "y": 1800,
-        "wires": []
-    },
-    {
-        "id": "a34afe93.7b6548",
-        "type": "function",
-        "z": "e987eb50.a7ba78",
-        "name": "Charge Control v3.0",
-        "func": "const MAX_BATTERY_CAPACITY = 40.0;\nconst ENERGY_1_PERC = MAX_BATTERY_CAPACITY / 100.0;\n\nlet energyValue = flow.get('energyTotalVal') || 0;\nlet energyPercToChargeVal = flow.get('energyPercToChargeVal') || 0;\n\nfunction ChargerController(){\n    let chargeStatus = false;\n    let energyPercToCharge = 0;\n    let energyValue = 0;\n    let energyValAtStart = 0;\n    let energyValAtStop = 0;\n    let energyCharged = 0;\n    \n    this.update = function(){\n        if (energyValue >= energyValAtStop){\n            chargeStatus = true;\n        }\n        energyCharged = energyValue - energyValAtStart;\n    }\n    this.startCharge = function(){\n        chargeStatus = false;\n        energyValAtStart =  energyValue;\n        energyValAtStop = Number((ENERGY_1_PERC * energyPercToCharge + energyValAtStop).toFixed(2));\n    }\n    this.stopCharge = function(){\n        chargeStatus = true;\n        energyCharged = energyValue - energyValAtStart;\n    }\n    this.setPercToCharge = function(value){\n        energyPercToCharge = value;\n    }\n    this.setCurrentEnergyValue = function(value){\n        energyValue = value;\n    }\n    this.getChargedEnergy = function(){\n        return energyCharged;\n    }\n    this.getChargedStatus = function(){\n        return chargeStatus;\n    }\n    this.getEnergyToCharge = function(){\n        return energyValAtStop - energyValAtStart;\n    }\n}\n\nconst STANDBY_POWER = 5;\nconst POWER_CHARGING_STATE = 2000;\n\nfunction PowerMonitor(){\n    let isBalancing = false\n    let isCharging = false;\n    let isStandby = false;\n    this.updatePowerValue = function(powerVal){\n        if (powerVal < STANDBY_POWER){\n            isBalancing = false\n            isCharging = false;\n            isStandby = true;\n        }\n        else if(powerVal > POWER_CHARGING_STATE){\n            isBalancing = false\n            isCharging = true;\n            isStandby = false;\n        }\n        else{\n            isBalancing = true\n            isCharging = true;\n            isStandby = false;\n        }\n    }\n    this.getStandbyStatus = function(){\n        return isStandby;\n    }\n    this.getBalancingStatus = function(){\n        return isBalancing;\n    }\n    this.getChargingStatus = function(){\n        return isCharging;\n    }\n}\n\nlet chargerController =  context.get('chargerController') || new ChargerController();\nchargerController.setPercToCharge(energyPercToChargeVal);\nchargerController.setCurrentEnergyValue(energyValue);\nchargerController.update();\n\nif (chargerController.getChargedStatus()){\n    chargerController.stopCharge();\n    msg.rce(\"RICARICA NISSAN: Ricarica completata\");\n    msg.payload = 0;\n}\n\nif(energyPercToChargeVal >0 && !chargerController.getChargedStatus()){\n    chargerController.startCharge();\n    msg.rce(\"RICARICA NISSAN: Ricarica avviata\");\n    msg.payload = 1;\n}\n\nlet powerMonitor = context.get('powerMonitor') || new PowerMonitor();\npowerMonitor.updatePowerValue(powerVal);\n\nlet waitingLoad = context.get('waitingLoad') || 0;\nlet timoutWaitingLoad = context.get('timoutWaitingLoad') || 0;\n\nif (powerMonitor.getStandbyStatus()) {\n    if (powerVal >0){\n        if(!waitingLoad){\n        timoutWaitingLoad = setTimeout(function(){\n\t\t    msg.rce = \"RICARICA NISSAN: Sgancio per assenza carico collegato\";\n            msg.payload = 0;\n            waitingLoad = 0;\n            node.send(msg);}, 300000);}\n        waitingLoad = 1;\n    }\n    else{\n        clearTimeout(timoutWaitingLoad);\n        waitingLoad = 0;\n    }\n}\n\ncontext.set('powerMonitor', powerMonitor);\ncontext.set('chargerController', chargerController);\ncontext.set('timoutWaitingLoad', timoutWaitingLoad);\ncontext.set('waitingLoad', waitingLoad);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 580,
-        "y": 1800,
-        "wires": [
-            [
-                "9664fd3c.68c368"
-            ]
-        ]
-    },
-    {
-        "id": "a9aebf7f.0f93d8",
-        "type": "inject",
-        "z": "af47c860.21273",
-        "name": "",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 210,
-        "y": 560,
-        "wires": [
-            [
-                "d3a3a3c0.e7289",
-                "329a8487.bd6094"
-            ]
-        ]
-    },
-    {
         "id": "d3a3a3c0.e7289",
         "type": "influxdb in",
         "z": "af47c860.21273",
@@ -10478,27 +9550,11 @@
         "precision": "",
         "retentionPolicy": "",
         "org": "organisation",
-        "x": 490,
-        "y": 540,
+        "x": 510,
+        "y": 280,
         "wires": [
-            [
-                "e880a6c2.074918"
-            ]
+            []
         ]
-    },
-    {
-        "id": "e880a6c2.074918",
-        "type": "debug",
-        "z": "af47c860.21273",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 650,
-        "y": 540,
-        "wires": []
     },
     {
         "id": "329a8487.bd6094",
@@ -10512,12 +9568,10 @@
         "precision": "",
         "retentionPolicy": "",
         "org": "organisation",
-        "x": 490,
-        "y": 580,
+        "x": 510,
+        "y": 320,
         "wires": [
-            [
-                "e880a6c2.074918"
-            ]
+            []
         ]
     },
     {
@@ -10527,8 +9581,8 @@
         "name": "",
         "controller": "5d0ef44d.6ae5c4",
         "itemname": "setpointPercRicarica",
-        "x": 130,
-        "y": 1240,
+        "x": 150,
+        "y": 1120,
         "wires": [
             [
                 "ae16a399.4da198"
@@ -10563,7 +9617,7 @@
         "y": 240,
         "wires": [
             [
-                "34a9ccf0.850ac4"
+                "7a4e7620.4989f"
             ],
             []
         ]
@@ -10579,7 +9633,7 @@
         "y": 320,
         "wires": [
             [
-                "9dbc1a75.b69a3"
+                "c4d71d47.b98f2"
             ],
             []
         ]
@@ -10704,66 +9758,34 @@
         "wires": []
     },
     {
-        "id": "6ba5f4b5.d66c84",
-        "type": "ui_led",
-        "z": "5b5ae0eb.cb95b",
-        "order": 4,
-        "group": "add34066.c25a9",
-        "width": 0,
-        "height": 0,
-        "label": "INT Telefoni",
-        "labelPlacement": "left",
-        "labelAlignment": "left",
-        "colorForValue": [
-            {
-                "color": "red",
-                "value": "0",
-                "valueType": "num"
-            },
-            {
-                "color": "green",
-                "value": "1",
-                "valueType": "num"
-            },
-            {
-                "color": "PURPLE",
-                "value": "2",
-                "valueType": "num"
-            }
-        ],
-        "allowColorForValueInMessage": false,
-        "name": "INT Telefoni",
-        "x": 990,
-        "y": 580,
-        "wires": []
-    },
-    {
         "id": "f9f3406e.719e2",
         "type": "ui_led",
         "z": "e987eb50.a7ba78",
-        "order": 4,
+        "order": 5,
         "group": "4f75689c.e4dd2",
-        "width": 1,
-        "height": 1,
-        "label": "",
+        "width": "0",
+        "height": "0",
+        "label": "STATO CARICA",
         "labelPlacement": "left",
         "labelAlignment": "left",
         "colorForValue": [
             {
-                "color": "red",
+                "color": "#ff0000",
                 "value": "OFF",
                 "valueType": "str"
             },
             {
-                "color": "green",
+                "color": "#008000",
                 "value": "ON",
                 "valueType": "str"
             }
         ],
         "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
         "name": "STATO CARICO",
         "x": 760,
-        "y": 400,
+        "y": 780,
         "wires": []
     },
     {
@@ -11379,7 +10401,7 @@
         "id": "d8d9bb2.463e648",
         "type": "ui_led",
         "z": "7aa2da03.bd1f7c",
-        "order": 4,
+        "order": 2,
         "group": "c66d2e37.c9d248",
         "width": 1,
         "height": 1,
@@ -11437,8 +10459,8 @@
         "id": "24cf0f75.840ae",
         "type": "ui_led",
         "z": "5b5ae0eb.cb95b",
-        "order": 2,
-        "group": "7c9364c.4aa5a1c",
+        "order": 6,
+        "group": "261dd92c.ffff5e",
         "width": 1,
         "height": 1,
         "label": "",
@@ -11833,5 +10855,618 @@
                 "b9e6dfa3.39a5b8"
             ]
         ]
+    },
+    {
+        "id": "b2211c99.ebecc8",
+        "type": "nora-thermostat",
+        "z": "d4025d43.ce8fc",
+        "devicename": "Termostato Camera",
+        "roomhint": "Camera",
+        "name": "",
+        "modes": "off",
+        "unit": "C",
+        "topic": "",
+        "passthru": false,
+        "commandOnly": false,
+        "queryOnly": false,
+        "bufferRangeCelsius": 2,
+        "nora": "e264142d.421a28",
+        "x": 810,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cf08aa19.54263",
+        "type": "openhab2-out",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "controller": "5d0ef44d.6ae5c4",
+        "itemname": "setpointPercRicarica",
+        "topic": "",
+        "payload": "",
+        "x": 180,
+        "y": 1240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cba573d8.447fc8",
+        "type": "json",
+        "z": "295673c6.e0b2c4",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 410,
+        "y": 340,
+        "wires": [
+            [
+                "45184749.deed3"
+            ]
+        ]
+    },
+    {
+        "id": "237d86c2.4a4b52",
+        "type": "mqtt in",
+        "z": "295673c6.e0b2c4",
+        "name": "",
+        "topic": "tele/tasmotaMisuratore/SENSOR",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ee95ae30.7fefe8",
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "cba573d8.447fc8"
+            ]
+        ]
+    },
+    {
+        "id": "45184749.deed3",
+        "type": "function",
+        "z": "295673c6.e0b2c4",
+        "name": "SonOff Direct (Full STAT",
+        "func": "//flow variables\nvar currentVal = flow.get('currentVal') || 0;\nvar voltageVal = flow.get('voltageVal') || 0;\nvar powerVal = flow.get('powerVal') || 0;\nvar factorVal = flow.get('factorVal') || 0;\nvar reactivePowerVal = flow.get('reactivePowerVal') || 0;\nvar apparentPowerVal = flow.get('apparentPowerVal') || 0;\nvar uptimeVal = flow.get('uptimeVal') || 0;\nvar timeVal = flow.get('timeVal') || 0;\nvar energyTotalVal = flow.get('energyTotalVal') || 0;\nvar energyYesterdayVal = flow.get('energyYesterdayVal') || 0;\nvar energyTodayVal = flow.get('energyTodayVal') || 0;\n\nmsg2 = {};\n\n/*\n    Here I check which proprieties exist.\n    If I interrogate the SonOff directly I'll have a StatusSNS in the proprieties.\n    The telemetry payload doesn't have that propriety. I did this so I can read\n    from multiple sources and output the same date from just one function block\n*/\n\nif('StatusSNS' in msg.payload){\n    factorVal = msg.payload.StatusSNS.ENERGY.Factor;\n    currentVal = msg.payload.StatusSNS.ENERGY.Current;\n    voltageVal = msg.payload.StatusSNS.ENERGY.Voltage;\n\tapparentPowerVal = msg.payload.StatusSNS.ENERGY.ApparentPower;\n\tpowerVal = msg.payload.StatusSNS.ENERGY.Power;\n\treactivePowerVal = msg.payload.StatusSNS.ENERGY.ReactivePower;\n}\nelse if('ENERGY' in msg.payload){\n    factorVal = msg.payload.ENERGY.Factor;\n    currentVal = msg.payload.ENERGY.Current;\n    voltageVal = msg.payload.ENERGY.Voltage;\n    apparentPowerVal = msg.payload.ENERGY.ApparentPower;\n\tpowerVal = msg.payload.ENERGY.Power;\n\treactivePowerVal = msg.payload.ENERGY.ReactivePower;\n\tenergyTotalVal = msg.payload.ENERGY.Total;\n\tenergyYesterdayVal = msg.payload.ENERGY.Yesterday;\n\tenergyTodayVal = msg.payload.ENERGY.Today;\n}\nelse if('UptimeSec' in msg.payload || 'Time' in msg.payload){\n    uptimeVal = msg.payload.UptimeSec;\n    timeVal = msg.payload.Time;\n}\n\n\n//Here I set the flow variables for external use (only this flow)\nflow.set('voltageVal', voltageVal);\nflow.set('currentVal', currentVal);\nflow.set('powerVal', powerVal);\nflow.set('reactivePowerVal', reactivePowerVal);\nflow.set('apparentPowerVal', apparentPowerVal);\nflow.set('factorVal', factorVal);\nflow.set('uptimeVal', uptimeVal);\nflow.set('timeVal', timeVal);\nflow.set('energyTotalVal', energyTotalVal);\nflow.set('energyYesterdayVal', energyYesterdayVal);\nflow.set('energyTodayVal', energyTodayVal);\n\n// Output 1 (for database)\nmsg.payload = {\n    voltage : Number(voltageVal.toFixed(2)),\n    current : Number(currentVal.toFixed(2)),\n    power : Number(powerVal.toFixed(2)),\n    reactivePower : Number(reactivePowerVal.toFixed(2)),\n    apparentPower : Number(apparentPowerVal.toFixed(2)),\n    factor : Number(factorVal.toFixed(2)),\n    energyTotal : Number(energyTotalVal),\n    energyYesterday : Number(energyYesterdayVal),\n    energyToday : Number(energyTodayVal)\n}\n\nmsg2.payload = {\n    uptime : uptimeVal,\n    time : timeVal\n}\nreturn [msg, msg2];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 630,
+        "y": 340,
+        "wires": [
+            [
+                "a439b44c.9d4de"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a439b44c.9d4de",
+        "type": "influxdb out",
+        "z": "295673c6.e0b2c4",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "measurement": "Misuratore",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Energy",
+        "retentionPolicyV18Flux": "",
+        "org": "",
+        "bucket": "",
+        "x": 940,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "dfcfd04f.5cf1f",
+        "type": "comment",
+        "z": "295673c6.e0b2c4",
+        "name": "SonoffPOW Misuratore - 192.168.0.87",
+        "info": "",
+        "x": 670,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "9e59f3cc.6d51e",
+        "type": "mqtt in",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "topic": "tele/tasmotaRicaricaNissan/SENSOR",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ee95ae30.7fefe8",
+        "x": 210,
+        "y": 1080,
+        "wires": [
+            [
+                "21ca78fa.6512d"
+            ]
+        ]
+    },
+    {
+        "id": "bdc8f3de.046868",
+        "type": "mqtt in",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "topic": "tele/tasmotaContatore/SENSOR",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ee95ae30.7fefe8",
+        "x": 190,
+        "y": 1040,
+        "wires": [
+            [
+                "21ca78fa.6512d"
+            ]
+        ]
+    },
+    {
+        "id": "ce1e9058.cef4e",
+        "type": "function",
+        "z": "e987eb50.a7ba78",
+        "name": "Charge Controler v3.0",
+        "func": "const STANDBY_POWER = 100;\nconst MAX_POWER = 3400;\nconst CAR_CAPACITY = 40.0; //kWh\n\nfunction PowerMonitor(){\n    this.power = 0.0;\n    this.update = function(powerVal){\n        this.power = powerVal;\n    }\n    this.getPower = function(){\n        return this.power;\n    }\n    this.getStatus = function(){\n        if(this.power > MAX_POWER){\n            return \"Overload\";\n        }\n        else if(this.power >= STANDBY_POWER){\n            return \"Charging\";\n        }\n        else if (this.power == 0){\n            return \"Off\";\n        }\n        else if (this.power < STANDBY_POWER){\n            return \"Standby\";\n        }\n    }\n}\nlet powerMonitor = context.get('powerMonitor') || new PowerMonitor();\n\nfunction ChargeController(){\n    this.energyTotalVal;\n    this.energyStartChargeVal;\n    this.energyStopChargeVal;\n    this.update = function(energyVal){\n        this.energyTotalVal = energyVal;\n    }\n    this.startCharge = function(percToCharge){\n        this.energyStartChargeVal = this.energyTotalVal;\n        this.energyCharged = 0;\n        this.energyStopChargeVal = Number(CAR_CAPACITY / 100.0 * percToCharge + this.energyStartChargeVal);\n    }\n    this.getEnergyVal = function(){\n        return this.energyTotalVal;\n    }\n    this.stopCharge = function(){\n        this.energyStopChargeVal = this.energyTotalVal;\n        this.energyCharged = this.energyTotalVal - this.energyStartChargeVal;\n    }\n    this.getStatus = function(){\n        if(this.energyTotalVal >= this.energyStopChargeVal){\n            return \"Charged\";\n        }\n        else{\n            return \"Charging\";\n        }\n    }\n    this.getEnergyToCharge = function(){\n        return this.energyStopChargeVal - this.energyStartChargeVal;\n    }\n    this.getChargedEnergy = function(){\n        return this.energyTotalVal - this.energyStartChargeVal;\n    }\n    this.getRemainingEnergy = function(){\n        return this.energyStopChargeVal - this.energyTotalVal;\n    }\n    this.getRemaingTime = function(powerVal){\n        let timeLeft = new Date((this.getRemainingEnergy() * 1000) / powerVal * 3600000);\n        return timeLeft.getHours()-1 + \" ore \" + timeLeft.getMinutes() + \" min\";\n    }\n}\nlet chargeController = context.get('chargeController') || new ChargeController();\n\nfunction TimeSlotMonitor(){\n    this.currentDate;\n    this.triggerDate;\n    this.remainingTime;\n    this.update = function(){\n        this.currentDate = new Date();\n        this.triggerDate = new Date();\n        this.triggerDate.setHours(23);\n        this.triggerDate.setMinutes(0);\n        this.remainingTime = new Date(this.triggerDate - this.currentDate);\n    }\n    this.isEconomyTime = function(){\n        return (this.currentDate > this.triggerDate || this.currentDate.getDay() == 6);\n    }\n    this.getRemaingTime = function(){\n        return this.remainingTime.getTime();\n    }\n    this.getRedeableRemaingTime = function(){\n        return this.remainingTime.getHours()-1 + \" ore e \" + this.remainingTime.getMinutes() + \" minuti\";\n    }\n    this.getTriggerDate = function(){\n        return this.triggerDate;\n    }\n}\nlet timeSlotMonitor = context.get('timeSlotMonitor') || new TimeSlotMonitor();\ntimeSlotMonitor.update();\n\nif (msg.topic == \"tele/tasmotaContatore/SENSOR\"){\n    if(msg.payload.ENERGY.Power > MAX_POWER){\n        msg.payload = 0;\n        msg.rce = \"Supero potenza di \" + (msg.payload.ENERGY.Power - MAX_POWER) + \"W\";\n        chargeController.stopCharge();\n        node.send(msg);\n    }\n}\n\nif (msg.topic == \"tele/tasmotaRicaricaNissan/SENSOR\"){\n    chargeController.update(msg.payload.ENERGY.Total);\n    powerMonitor.update(msg.payload.ENERGY.Power);\n    msg2 = {};\n    if (chargeController.getStatus() == \"Charged\" && powerMonitor.getStatus() != \"Off\"){\n        chargeController.stopCharge();\n        msg.payload = 0;\n        msg.rce = \"Ricarica completata (\" + chargeController.getChargedEnergy() + \"kWh)\";\n        msg2 = {\n            \"remainingTime\" : \"Ricarica terminata\",\n            \"remainingEnergy\" : \"0\",\n            \"energyToCharge\" : 0,\n            \"percentageDone\" : 100\n        };\n        return [{}, msg2];\n    }\n    if (chargeController.getStatus() == \"Charging\"){\n        msg2 = {\n            \"remainingTime\" : chargeController.getRemaingTime(powerMonitor.getPower()),\n            \"remainingEnergy\" : chargeController.getRemainingEnergy(),\n            \"energyToCharge\" : chargeController.getEnergyToCharge(),\n            \"percentageDone\" : 0\n        };\n        return [{}, msg2];\n    }\n}\n\nlet timedOutActivation = context.get('timedOutActivation') || 0;\nif (msg.topic == \"percToCharge\"){\n    if (msg.payload > 0){\n        if (timeSlotMonitor.isEconomyTime()){\n            chargeController.startCharge(msg.payload);\n            msg.payload = 1;\n            msg.rce = \"Avvio ricarica di \" + chargeController.getEnergyToCharge() + \"kWh\";\n        }\n        else{\n            msg.rce = \"Ricarica prenotata. Inserzione tra \" + timeSlotMonitor.getRedeableRemaingTime();\n            msg.payload = 0;\n            timedOutActivation = setTimeout(function(){\n                chargeController.startCharge(msg.payload);\n                msg.payload = 1;\n                msg.rce = \"Avvio ricarica prenotata di \" + chargeController.getEnergyToCharge() + \"kWh\";\n                node.send(msg);\n            }, timeSlotMonitor.getRemaingTime());\n        }\n    }\n    else{\n        chargeController.stopCharge();\n        clearTimeout(timedOutActivation);\n        msg.rce = \"Ricarica annullata\";\n    }\n    node.send(msg);\n}\n\nif (msg.topic == \"forceCharge\"){\n    chargeController.startCharge(100);\n    msg.payload = 1;\n    msg.rce = \"Avvio ricarica forzata\";\n    node.send(msg);\n}\n\ncontext.set('timedOutActivation', timedOutActivation);\ncontext.set('timeSlotMonitor', timeSlotMonitor);\ncontext.set('powerMonitor', powerMonitor);\ncontext.set('chargeController', chargeController);\nreturn;",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 760,
+        "y": 1080,
+        "wires": [
+            [
+                "f76685a6.0dce28",
+                "40567a2e.45714c"
+            ],
+            [
+                "808b32d8.8ea79",
+                "48fccdbf.62ffc4",
+                "9ce85c86.df6b8",
+                "b293ab3d.4f696"
+            ]
+        ]
+    },
+    {
+        "id": "b293ab3d.4f696",
+        "type": "debug",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "21ca78fa.6512d",
+        "type": "json",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 450,
+        "y": 1040,
+        "wires": [
+            [
+                "ce1e9058.cef4e",
+                "1f885bea.739ecc"
+            ]
+        ]
+    },
+    {
+        "id": "638528a3.1668b8",
+        "type": "noraf-light",
+        "z": "295673c6.e0b2c4",
+        "d": true,
+        "devicename": "Luce Prova",
+        "lightcolor": false,
+        "brightnesscontrol": true,
+        "commandonlycolor": false,
+        "turnonwhenbrightnesschanges": false,
+        "passthru": true,
+        "statepayload": true,
+        "brightnessoverride": "",
+        "roomhint": "Scale",
+        "name": "Luce Prova",
+        "colortype": "hsv",
+        "nora": "17c8dd48.77be83",
+        "topic": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "temperaturemin": "2700",
+        "temperaturemax": "5500",
+        "x": 710,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c4d71d47.b98f2",
+        "type": "ui_numeric",
+        "z": "5b5ae0eb.cb95b",
+        "name": "",
+        "label": "Setpoint",
+        "tooltip": "",
+        "group": "261dd92c.ffff5e",
+        "order": 8,
+        "width": 6,
+        "height": 1,
+        "wrap": true,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": "16",
+        "max": "30",
+        "step": 1,
+        "x": 300,
+        "y": 320,
+        "wires": [
+            [
+                "9dbc1a75.b69a3"
+            ]
+        ]
+    },
+    {
+        "id": "7a4e7620.4989f",
+        "type": "ui_switch",
+        "z": "5b5ae0eb.cb95b",
+        "name": "",
+        "label": "Termostato",
+        "tooltip": "",
+        "group": "261dd92c.ffff5e",
+        "order": 7,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "ON",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "OFF",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "34a9ccf0.850ac4"
+            ]
+        ]
+    },
+    {
+        "id": "f76685a6.0dce28",
+        "type": "mqtt out",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "topic": "cmnd/tasmotaRicaricaNissan/POWER0",
+        "qos": "0",
+        "retain": "false",
+        "broker": "ee95ae30.7fefe8",
+        "x": 1060,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "6ba0c7b2.64fd1",
+        "type": "calculator",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "inputMsgField": "payload.voltage",
+        "outputMsgField": "payload",
+        "operation": "rdec",
+        "constant": "2",
+        "round": true,
+        "decimals": "2",
+        "x": 960,
+        "y": 80,
+        "wires": [
+            [
+                "7e7193ee.c7c72c"
+            ]
+        ]
+    },
+    {
+        "id": "e952f5e2.7ebae8",
+        "type": "calculator",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "inputMsgField": "payload.current",
+        "outputMsgField": "payload",
+        "operation": "rdec",
+        "constant": "2",
+        "round": true,
+        "decimals": "2",
+        "x": 960,
+        "y": 120,
+        "wires": [
+            [
+                "cd25c7c6.6062d"
+            ]
+        ]
+    },
+    {
+        "id": "f4694626.88e6a",
+        "type": "calculator",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "inputMsgField": "payload.power",
+        "outputMsgField": "payload",
+        "operation": "rdec",
+        "constant": "0",
+        "round": true,
+        "decimals": 0,
+        "x": 960,
+        "y": 160,
+        "wires": [
+            [
+                "9dbfdd80.edef5",
+                "6f7e6b6a.86c174",
+                "714fe196.c8d6d"
+            ]
+        ]
+    },
+    {
+        "id": "62f50746.5037a",
+        "type": "ui_button",
+        "z": "e987eb50.a7ba78",
+        "name": "Force",
+        "group": "4f75689c.e4dd2",
+        "order": 6,
+        "width": "2",
+        "height": "1",
+        "passthru": true,
+        "label": "FORZA RICARICA",
+        "tooltip": "Forza ricarica",
+        "color": "",
+        "bgcolor": "",
+        "icon": "transform",
+        "payload": "100",
+        "payloadType": "num",
+        "topic": "forceCharge",
+        "topicType": "str",
+        "x": 490,
+        "y": 1160,
+        "wires": [
+            [
+                "ce1e9058.cef4e"
+            ]
+        ],
+        "outputLabels": [
+            "msg.background"
+        ]
+    },
+    {
+        "id": "1e2ea53c.5f472b",
+        "type": "influxdb in",
+        "z": "d4025d43.ce8fc",
+        "d": true,
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "SELECT min(\"temperature\") FROM \"Home\".\"autogen\".\"livingRoom\" WHERE time > now() - 1d AND time < now()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 850,
+        "y": 140,
+        "wires": [
+            [
+                "d82bab4b.a94868"
+            ]
+        ]
+    },
+    {
+        "id": "1996d18d.f754fe",
+        "type": "influxdb in",
+        "z": "d4025d43.ce8fc",
+        "d": true,
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "SELECT max(\"temperature\") FROM \"Home\".\"autogen\".\"livingRoom\" WHERE time > now() - 1d AND time < now()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 850,
+        "y": 180,
+        "wires": [
+            [
+                "240ed2f0.00ad76"
+            ]
+        ]
+    },
+    {
+        "id": "b52c873e.440b9",
+        "type": "change",
+        "z": "d4025d43.ce8fc",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperature",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "camera_temp",
+                "pt": "flow",
+                "to": "payload.temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 100,
+        "wires": [
+            [
+                "c5deda27.2751f"
+            ]
+        ]
+    },
+    {
+        "id": "65c80c3f.e47ad4",
+        "type": "change",
+        "z": "d4025d43.ce8fc",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.humidity",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "camera_umid",
+                "pt": "flow",
+                "to": "payload.humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 220,
+        "wires": [
+            [
+                "bcb918ff.5447b8"
+            ]
+        ]
+    },
+    {
+        "id": "ac5a1889.5a8da8",
+        "type": "influxdb in",
+        "z": "d4025d43.ce8fc",
+        "d": true,
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "SELECT min(\"humidity\") FROM \"Home\".\"autogen\".\"livingRoom\" WHERE time > now() - 1d AND time < now()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 850,
+        "y": 260,
+        "wires": [
+            [
+                "42cfd901.ee6328"
+            ]
+        ]
+    },
+    {
+        "id": "98ab78a7.2239a8",
+        "type": "influxdb in",
+        "z": "d4025d43.ce8fc",
+        "d": true,
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "SELECT max(\"humidity\") FROM \"Home\".\"autogen\".\"livingRoom\" WHERE time > now() - 1d AND time < now()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 850,
+        "y": 300,
+        "wires": [
+            [
+                "a077ca6d.783138",
+                "5e42f8bf.a56768"
+            ]
+        ]
+    },
+    {
+        "id": "6efe0adb.930714",
+        "type": "mqtt in",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "topic": "tele/tasmotaRicaricaNissan/STATE",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ee95ae30.7fefe8",
+        "x": 200,
+        "y": 780,
+        "wires": [
+            [
+                "4f07fc90.943eec"
+            ]
+        ]
+    },
+    {
+        "id": "5e42f8bf.a56768",
+        "type": "debug",
+        "z": "d4025d43.ce8fc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "9ce85c86.df6b8",
+        "type": "ui_text",
+        "z": "e987eb50.a7ba78",
+        "group": "4f75689c.e4dd2",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Energia rimasta",
+        "format": "{{msg.remainingEnergy}} kWh",
+        "layout": "row-spread",
+        "x": 980,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "1f885bea.739ecc",
+        "type": "debug",
+        "z": "e987eb50.a7ba78",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 1020,
+        "wires": []
     }
 ]
