@@ -37,7 +37,7 @@ Un Sonoff POW2 per monitorare l'energia prodotta da due panellini solari che imm
 [Controllo dispositivi](https://github.com/metalneo-glitch/RasHome/blob/master/img/Dispositivi.png)
 [Monitoraggio Energia](https://github.com/metalneo-glitch/RasHome/blob/master/img/Energia.png)
 [Monitoraggio Rete](https://github.com/metalneo-glitch/RasHome/blob/master/img/Network.png)
-[Ricarica EV](https://github.com/metalneo-glitch/RasHome/blob/master/img/Ricarica EV.png)
+[Ricarica EV](https://github.com/metalneo-glitch/RasHome/blob/master/img/Ricarica_EV.png)
 [Speedtest Rete](https://github.com/metalneo-glitch/RasHome/blob/master/img/Speedtest.png)
 [Info](https://github.com/metalneo-glitch/RasHome/blob/master/img/About.png)
 ### Version
