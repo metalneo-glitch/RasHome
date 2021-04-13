@@ -572,78 +572,6 @@
         "collapse": false
     },
     {
-        "id": "ccefbe43.f1aaf8",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "d59a5488.4bc118",
-        "order": 7,
-        "width": 3,
-        "height": 1
-    },
-    {
-        "id": "62af3713.e307c",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "d59a5488.4bc118",
-        "order": 10,
-        "width": 3,
-        "height": 1
-    },
-    {
-        "id": "b6d3e9ed.dc66e8",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "7b6ab9d.5f695c8",
-        "order": 7,
-        "width": 3,
-        "height": 1
-    },
-    {
-        "id": "dc9eaab7.eb2018",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "7b6ab9d.5f695c8",
-        "order": 10,
-        "width": 3,
-        "height": 1
-    },
-    {
-        "id": "18c74c47.61d2bc",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "380915c3.9fa502",
-        "order": 4,
-        "width": 3,
-        "height": 1
-    },
-    {
-        "id": "9ffb6b8f.79fdc",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "380915c3.9fa502",
-        "order": 5,
-        "width": 3,
-        "height": 1
-    },
-    {
-        "id": "a512766f.fcff9",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "380915c3.9fa502",
-        "order": 8,
-        "width": 3,
-        "height": 1
-    },
-    {
-        "id": "be71b7e5.5f1518",
-        "type": "ui_spacer",
-        "name": "spacer",
-        "group": "380915c3.9fa502",
-        "order": 11,
-        "width": 3,
-        "height": 1
-    },
-    {
         "id": "5058ca3b.b22614",
         "type": "ui_tab",
         "name": "Leaf",
@@ -779,7 +707,7 @@
         "type": "noraf-config",
         "name": "SmartNORA",
         "group": "NewSmart",
-        "twofactor": "off",
+        "twofactor": "ack",
         "twofactorpin": "",
         "localexecution": true,
         "structure": "Campo"
@@ -795,18 +723,54 @@
         "collapse": false
     },
     {
+        "id": "687ef115.e04e58",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "d59a5488.4bc118",
+        "order": 6,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "e762e8b2.72a948",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "d59a5488.4bc118",
+        "order": 9,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "64d331f.87558d",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "7b6ab9d.5f695c8",
+        "order": 6,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "da1ef980.23f838",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "7b6ab9d.5f695c8",
+        "order": 9,
+        "width": 3,
+        "height": 1
+    },
+    {
         "id": "dc4f7c3c.a32ee8",
         "type": "ui_gauge",
         "z": "46a757ab.7b1178",
         "name": "Temperatura Sala",
         "group": "d59a5488.4bc118",
-        "order": 2,
+        "order": 1,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Temperatura",
         "label": "°C",
-        "format": "{{msg.payload.temperature}}",
+        "format": "{{msg.payload}}",
         "min": "0",
         "max": "40",
         "colors": [
@@ -816,7 +780,7 @@
         ],
         "seg1": "18",
         "seg2": "25",
-        "x": 1170,
+        "x": 1070,
         "y": 80,
         "wires": []
     },
@@ -826,13 +790,13 @@
         "z": "46a757ab.7b1178",
         "name": "Umidità Sala",
         "group": "d59a5488.4bc118",
-        "order": 3,
+        "order": 2,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Umidità",
         "label": "%",
-        "format": "{{msg.payload.humidity}}",
+        "format": "{{msg.payload}}",
         "min": 0,
         "max": "100",
         "colors": [
@@ -842,7 +806,7 @@
         ],
         "seg1": "45",
         "seg2": "70",
-        "x": 1150,
+        "x": 1050,
         "y": 200,
         "wires": []
     },
@@ -852,13 +816,13 @@
         "z": "f2a638ae.d93ca8",
         "name": "Temperatura",
         "group": "7b6ab9d.5f695c8",
-        "order": 2,
+        "order": 1,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Temperatura",
         "label": "°C",
-        "format": "{{msg.payload.temperature}}",
+        "format": "{{msg.payload}}",
         "min": "0",
         "max": "50",
         "colors": [
@@ -868,7 +832,7 @@
         ],
         "seg1": "18",
         "seg2": "25",
-        "x": 1170,
+        "x": 1110,
         "y": 60,
         "wires": []
     },
@@ -878,13 +842,13 @@
         "z": "f2a638ae.d93ca8",
         "name": "Umidità",
         "group": "7b6ab9d.5f695c8",
-        "order": 3,
+        "order": 2,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Umidità",
         "label": "%",
-        "format": "{{msg.payload.humidity}}",
+        "format": "{{msg.payload}}",
         "min": 0,
         "max": "100",
         "colors": [
@@ -894,7 +858,7 @@
         ],
         "seg1": "45",
         "seg2": "70",
-        "x": 1160,
+        "x": 1100,
         "y": 180,
         "wires": []
     },
@@ -973,14 +937,14 @@
         "type": "ui_text",
         "z": "46a757ab.7b1178",
         "group": "d59a5488.4bc118",
-        "order": 5,
+        "order": 4,
         "width": 3,
         "height": 1,
         "name": "TMAX",
         "label": "Massima: ",
-        "format": "{{msg.payload.salaMaxTemp}} °C",
+        "format": "{{msg.payload[0]._value}} °C",
         "layout": "row-center",
-        "x": 1130,
+        "x": 1030,
         "y": 120,
         "wires": []
     },
@@ -989,14 +953,14 @@
         "type": "ui_text",
         "z": "46a757ab.7b1178",
         "group": "d59a5488.4bc118",
-        "order": 9,
+        "order": 8,
         "width": 3,
         "height": 1,
         "name": "TMIN",
         "label": "Minima",
-        "format": "{{msg.payload.salaMinTemp}} °C",
+        "format": "{{msg.payload[0]._value}} °C",
         "layout": "row-center",
-        "x": 1130,
+        "x": 1030,
         "y": 160,
         "wires": []
     },
@@ -1005,14 +969,14 @@
         "type": "ui_text",
         "z": "46a757ab.7b1178",
         "group": "d59a5488.4bc118",
-        "order": 6,
+        "order": 5,
         "width": 3,
         "height": 1,
         "name": "H MAX",
         "label": "Massimo: ",
         "format": "{{msg.payload.salaMaxUmid}} %",
         "layout": "row-center",
-        "x": 1140,
+        "x": 1040,
         "y": 240,
         "wires": []
     },
@@ -1021,14 +985,14 @@
         "type": "ui_text",
         "z": "46a757ab.7b1178",
         "group": "d59a5488.4bc118",
-        "order": 8,
+        "order": 7,
         "width": 3,
         "height": 1,
         "name": "H MIN",
         "label": "Minimo: ",
         "format": "{{msg.payload.salaMinUmid}} %",
         "layout": "row-center",
-        "x": 1130,
+        "x": 1030,
         "y": 280,
         "wires": []
     },
@@ -1071,14 +1035,14 @@
         "type": "ui_text",
         "z": "f2a638ae.d93ca8",
         "group": "7b6ab9d.5f695c8",
-        "order": 5,
+        "order": 4,
         "width": 3,
         "height": 1,
         "name": "TMAX",
         "label": "Massima: ",
-        "format": "{{msg.payload.serverMaxTemp}} °C",
+        "format": "{{msg.payload[0]._value}} °C",
         "layout": "row-center",
-        "x": 1150,
+        "x": 1090,
         "y": 100,
         "wires": []
     },
@@ -1087,14 +1051,14 @@
         "type": "ui_text",
         "z": "f2a638ae.d93ca8",
         "group": "7b6ab9d.5f695c8",
-        "order": 8,
+        "order": 7,
         "width": 3,
         "height": 1,
         "name": "TMIN",
         "label": "Minima",
-        "format": "{{msg.payload.serverMinTemp}} °C",
+        "format": "{{msg.payload[0]._value}} °C",
         "layout": "row-center",
-        "x": 1150,
+        "x": 1090,
         "y": 140,
         "wires": []
     },
@@ -1103,14 +1067,14 @@
         "type": "ui_text",
         "z": "f2a638ae.d93ca8",
         "group": "7b6ab9d.5f695c8",
-        "order": 6,
+        "order": 5,
         "width": 3,
         "height": 1,
         "name": "H MAX",
         "label": "Massimo: ",
-        "format": "{{msg.payload.serverMaxUmid}} %",
+        "format": "{{msg.payload[0]._value}} %",
         "layout": "row-center",
-        "x": 1160,
+        "x": 1100,
         "y": 220,
         "wires": []
     },
@@ -1119,14 +1083,14 @@
         "type": "ui_text",
         "z": "f2a638ae.d93ca8",
         "group": "7b6ab9d.5f695c8",
-        "order": 9,
+        "order": 8,
         "width": 3,
         "height": 1,
         "name": "H MIN",
         "label": "Minimo: ",
-        "format": "{{msg.payload.serverMinUmid}} %",
+        "format": "{{msg.payload[0]._value}} %",
         "layout": "row-center",
-        "x": 1150,
+        "x": 1090,
         "y": 260,
         "wires": []
     },
@@ -1138,6 +1102,8 @@
         "func": "var sala_temp=flow.get('sala_temp') || 0;\nvar sala_max_temp=flow.get('sala_max_temp') || 0;\nvar sala_min_temp=flow.get('sala_min_temp') || 50;\nvar sala_umid=flow.get('sala_umid') || 0;\nvar sala_max_umid=flow.get('sala_max_umid') || 0;\nvar sala_min_umid=flow.get('sala_min_umid') || 100;\nvar sala_lum=flow.get('sala_lum') || 0;\n\nvar currentdate = new Date();\nvar datetime = currentdate.getDate() + \"/\" + (currentdate.getMonth()+1) + \"/\" + currentdate.getFullYear() + \" - \" + currentdate.getHours() + \":\" +currentdate.getMinutes() + \":\" + currentdate.getSeconds();\n\nmsg.payload = datetime + '\\nDati Soggiorno:\\nTemperatura: ' + sala_temp + ' °C\\nTemperatura massima: ' + sala_max_temp + ' °C\\nTemperatura minima: ' + sala_min_temp + ' °C\\n\\nUmidità: ' + sala_umid + ' %\\nUmidità massima: ' + sala_max_umid + ' %\\nUmidità minima: ' + sala_min_umid + ' %\\n\\nLuminosità: ' + sala_lum + \" %\";\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 490,
         "y": 460,
         "wires": [
@@ -1154,6 +1120,8 @@
         "func": "var server_temp=flow.get('server_temp') || 0;\nvar server_max_temp=flow.get('server_max_temp') || 0;\nvar server_min_temp=flow.get('server_min_temp') || 50;\nvar server_umid=flow.get('server_umid') || 0;\nvar server_max_umid=flow.get('server_max_umid') || 0;\nvar server_min_umid=flow.get('server_min_umid') || 100;\n\nvar currentdate = new Date();\nvar datetime = currentdate.getDate() + \"/\" + (currentdate.getMonth()+1) + \"/\" + currentdate.getFullYear() + \" - \" + currentdate.getHours() + \":\" +currentdate.getMinutes() + \":\" + currentdate.getSeconds();\n\n\nmsg.payload = datetime + '\\nDati Sala Server:\\nTemperatura: ' + server_temp + ' °C\\nTemperatura massima: ' + server_max_temp + ' °C\\nTemperatura minima: ' + server_min_temp + ' °C\\n\\nUmidità: ' + server_umid + ' %\\nUmidità massima: ' + server_max_umid + ' %\\nUmidità minima: ' + server_min_umid + ' %';\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 490,
         "y": 480,
         "wires": [
@@ -1492,13 +1460,13 @@
         "z": "7aa2da03.bd1f7c",
         "name": "Umidità",
         "group": "380915c3.9fa502",
-        "order": 3,
+        "order": 2,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Umidità",
         "label": "%",
-        "format": "{{msg.payload.humidity}}",
+        "format": "{{msg.payload}}",
         "min": 0,
         "max": "100",
         "colors": [
@@ -1508,7 +1476,7 @@
         ],
         "seg1": "70",
         "seg2": "80",
-        "x": 1100,
+        "x": 1060,
         "y": 200,
         "wires": []
     },
@@ -1518,13 +1486,13 @@
         "z": "7aa2da03.bd1f7c",
         "name": "Temperatura",
         "group": "380915c3.9fa502",
-        "order": 2,
+        "order": 1,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Temperatura",
         "label": "°C",
-        "format": "{{msg.payload.temperature}}",
+        "format": "{{msg.payload}}",
         "min": "0",
         "max": "50",
         "colors": [
@@ -1534,7 +1502,7 @@
         ],
         "seg1": "18",
         "seg2": "25",
-        "x": 1110,
+        "x": 1070,
         "y": 80,
         "wires": []
     },
@@ -1543,14 +1511,14 @@
         "type": "ui_text",
         "z": "7aa2da03.bd1f7c",
         "group": "380915c3.9fa502",
-        "order": 6,
+        "order": 3,
         "width": 3,
         "height": 1,
         "name": "TMAX",
         "label": "Massima: ",
         "format": "{{msg.payload[0]._value}} °C",
         "layout": "row-center",
-        "x": 1090,
+        "x": 1050,
         "y": 120,
         "wires": []
     },
@@ -1559,14 +1527,14 @@
         "type": "ui_text",
         "z": "7aa2da03.bd1f7c",
         "group": "380915c3.9fa502",
-        "order": 9,
+        "order": 5,
         "width": 3,
         "height": 1,
         "name": "TMIN",
         "label": "Minima",
         "format": "{{msg.payload[0]._value}} °C",
         "layout": "row-center",
-        "x": 1090,
+        "x": 1050,
         "y": 160,
         "wires": []
     },
@@ -1575,14 +1543,14 @@
         "type": "ui_text",
         "z": "7aa2da03.bd1f7c",
         "group": "380915c3.9fa502",
-        "order": 7,
+        "order": 4,
         "width": 3,
         "height": 1,
         "name": "H MAX",
         "label": "Massimo: ",
         "format": "{{msg.payload[0]._value}} %",
         "layout": "row-center",
-        "x": 1100,
+        "x": 1060,
         "y": 240,
         "wires": []
     },
@@ -1591,14 +1559,14 @@
         "type": "ui_text",
         "z": "7aa2da03.bd1f7c",
         "group": "380915c3.9fa502",
-        "order": 10,
+        "order": 6,
         "width": 3,
         "height": 1,
         "name": "H MIN",
         "label": "Minimo: ",
         "format": "{{msg.payload[0]._value}} %",
         "layout": "row-center",
-        "x": 1090,
+        "x": 1050,
         "y": 280,
         "wires": []
     },
@@ -1608,13 +1576,13 @@
         "z": "46a757ab.7b1178",
         "name": "Luminosità Sala",
         "group": "d59a5488.4bc118",
-        "order": 4,
+        "order": 3,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Luminosità",
         "label": "%",
-        "format": "{{msg.payload.luminosity}}",
+        "format": "{{msg.payload}}",
         "min": 0,
         "max": "100",
         "colors": [
@@ -1624,7 +1592,7 @@
         ],
         "seg1": "",
         "seg2": "",
-        "x": 1160,
+        "x": 1060,
         "y": 320,
         "wires": []
     },
@@ -1657,13 +1625,13 @@
         "z": "f2a638ae.d93ca8",
         "name": "Luminosità Server Room",
         "group": "7b6ab9d.5f695c8",
-        "order": 4,
+        "order": 3,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Luminosità",
         "label": "%",
-        "format": "{{msg.payload.luminosity}}",
+        "format": "{{msg.payload}}",
         "min": 0,
         "max": "100",
         "colors": [
@@ -1673,25 +1641,9 @@
         ],
         "seg1": "",
         "seg2": "",
-        "x": 1210,
+        "x": 1150,
         "y": 300,
         "wires": []
-    },
-    {
-        "id": "6fe9c13a.3298a",
-        "type": "function",
-        "z": "f2a638ae.d93ca8",
-        "name": "Esporta dati luminosità",
-        "func": "flow.set('serverroom_lum', msg.payload.luminosity);\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 860,
-        "y": 300,
-        "wires": [
-            [
-                "6aee73a9.89d104"
-            ]
-        ]
     },
     {
         "id": "11370f98.37ce7",
@@ -1813,7 +1765,7 @@
         "type": "influxdb out",
         "z": "46a757ab.7b1178",
         "influxdb": "95c76cc2.f1041",
-        "name": "Home database",
+        "name": "livingRoom database",
         "measurement": "livingRoom",
         "precision": "",
         "retentionPolicy": "",
@@ -1821,7 +1773,7 @@
         "retentionPolicyV18Flux": "",
         "org": "",
         "bucket": "",
-        "x": 780,
+        "x": 800,
         "y": 360,
         "wires": []
     },
@@ -1830,7 +1782,7 @@
         "type": "influxdb out",
         "z": "f2a638ae.d93ca8",
         "influxdb": "95c76cc2.f1041",
-        "name": "",
+        "name": "serverRoom Database",
         "measurement": "serverRoom",
         "precision": "",
         "retentionPolicy": "",
@@ -1838,7 +1790,7 @@
         "retentionPolicyV18Flux": "",
         "org": "",
         "bucket": "",
-        "x": 930,
+        "x": 860,
         "y": 340,
         "wires": []
     },
@@ -1929,8 +1881,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "ee95ae30.7fefe8",
-        "x": 700,
-        "y": 680,
+        "x": 680,
+        "y": 620,
         "wires": []
     },
     {
@@ -1941,8 +1893,8 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 390,
-        "y": 220,
+        "x": 350,
+        "y": 80,
         "wires": [
             [
                 "cb300288.3b174"
@@ -1958,8 +1910,8 @@
         "qos": "2",
         "datatype": "auto",
         "broker": "ee95ae30.7fefe8",
-        "x": 170,
-        "y": 240,
+        "x": 150,
+        "y": 120,
         "wires": [
             [
                 "3725c2fa.5176fe"
@@ -1984,8 +1936,8 @@
         "payload": "8",
         "payloadType": "str",
         "topic": "",
-        "x": 440,
-        "y": 680,
+        "x": 420,
+        "y": 620,
         "wires": [
             [
                 "f538af4b.322e68"
@@ -2004,8 +1956,8 @@
         "label": "Potenza apparente",
         "format": "{{msg.payload.apparentPower}} VA",
         "layout": "row-spread",
-        "x": 1050,
-        "y": 320,
+        "x": 790,
+        "y": 280,
         "wires": []
     },
     {
@@ -2020,8 +1972,8 @@
         "label": "Potenza reattiva",
         "format": "{{msg.payload.reactivePower}} VAr",
         "layout": "row-spread",
-        "x": 1040,
-        "y": 280,
+        "x": 780,
+        "y": 240,
         "wires": []
     },
     {
@@ -2036,8 +1988,8 @@
         "label": "Cos fi",
         "format": "{{msg.payload.factor}}",
         "layout": "row-spread",
-        "x": 1010,
-        "y": 360,
+        "x": 750,
+        "y": 320,
         "wires": []
     },
     {
@@ -2062,8 +2014,8 @@
         ],
         "seg1": "13",
         "seg2": "14",
-        "x": 1220,
-        "y": 200,
+        "x": 960,
+        "y": 160,
         "wires": []
     },
     {
@@ -2074,8 +2026,8 @@
         "func": "//flow variables\nvar currentVal = flow.get('currentVal') || 0;\nvar voltageVal = flow.get('voltageVal') || 0;\nvar powerVal = flow.get('powerVal') || 0;\nvar factorVal = flow.get('factorVal') || 0;\nvar reactivePowerVal = flow.get('reactivePowerVal') || 0;\nvar apparentPowerVal = flow.get('apparentPowerVal') || 0;\nvar uptimeVal = flow.get('uptimeVal') || 0;\nvar timeVal = flow.get('timeVal') || 0;\nvar energyTotalVal = flow.get('energyTotalVal') || 0;\nvar energyYesterdayVal = flow.get('energyYesterdayVal') || 0;\nvar energyTodayVal = flow.get('energyTodayVal') || 0;\n\nmsg2 = {};\n\n/*\n    Here I check which proprieties exist.\n    If I interrogate the SonOff directly I'll have a StatusSNS in the proprieties.\n    The telemetry payload doesn't have that propriety. I did this so I can read\n    from multiple sources and output the same date from just one function block\n*/\n\nif('StatusSNS' in msg.payload){\n    factorVal = msg.payload.StatusSNS.ENERGY.Factor;\n    currentVal = msg.payload.StatusSNS.ENERGY.Current;\n    voltageVal = msg.payload.StatusSNS.ENERGY.Voltage;\n\tapparentPowerVal = msg.payload.StatusSNS.ENERGY.ApparentPower;\n\tpowerVal = msg.payload.StatusSNS.ENERGY.Power;\n\treactivePowerVal = msg.payload.StatusSNS.ENERGY.ReactivePower;\n}\nelse if('ENERGY' in msg.payload){\n    factorVal = msg.payload.ENERGY.Factor;\n    currentVal = msg.payload.ENERGY.Current;\n    voltageVal = msg.payload.ENERGY.Voltage;\n    apparentPowerVal = msg.payload.ENERGY.ApparentPower;\n\tpowerVal = msg.payload.ENERGY.Power;\n\treactivePowerVal = msg.payload.ENERGY.ReactivePower;\n\tenergyTotalVal = msg.payload.ENERGY.Total;\n\tenergyYesterdayVal = msg.payload.ENERGY.Yesterday;\n\tenergyTodayVal = msg.payload.ENERGY.Today;\n}\nelse if('UptimeSec' in msg.payload || 'Time' in msg.payload){\n    uptimeVal = msg.payload.UptimeSec;\n    timeVal = msg.payload.Time;\n}\n\n\n//Here I set the flow variables for external use (only this flow)\nflow.set('voltageVal', voltageVal);\nflow.set('currentVal', currentVal);\nflow.set('powerVal', powerVal);\nflow.set('reactivePowerVal', reactivePowerVal);\nflow.set('apparentPowerVal', apparentPowerVal);\nflow.set('factorVal', factorVal);\nflow.set('uptimeVal', uptimeVal);\nflow.set('timeVal', timeVal);\nflow.set('energyTotalVal', energyTotalVal);\nflow.set('energyYesterdayVal', energyYesterdayVal);\nflow.set('energyTodayVal', energyTodayVal);\n\n// Output 1 (for database)\nmsg.payload = {\n    voltage : Number(voltageVal.toFixed(2)),\n    current : Number(currentVal.toFixed(2)),\n    power : Number(powerVal.toFixed(2)),\n    reactivePower : Number(reactivePowerVal.toFixed(2)),\n    apparentPower : Number(apparentPowerVal.toFixed(2)),\n    factor : Number(factorVal.toFixed(2)),\n    energyTotal : Number(energyTotalVal),\n    energyYesterday : Number(energyYesterdayVal),\n    energyToday : Number(energyTodayVal)\n}\n\nmsg2.payload = {\n    uptime : uptimeVal,\n    time : timeVal\n}\nreturn [msg, msg2];",
         "outputs": 2,
         "noerr": 0,
-        "x": 650,
-        "y": 220,
+        "x": 530,
+        "y": 80,
         "wires": [
             [
                 "b5e21944.5245",
@@ -2099,8 +2051,8 @@
         "command": "/contatore",
         "commandType": "str",
         "commandCase": false,
-        "x": 1650,
-        "y": 700,
+        "x": 1050,
+        "y": 520,
         "wires": [
             [
                 "1409f68d.f3a651"
@@ -2115,8 +2067,8 @@
         "func": "var currentVal = flow.get('currentVal') || 0;\nvar voltageVal = flow.get('voltageVal') || 0;\nvar powerVal = flow.get('powerVal') || 0;\nvar uptimeVal = flow.get('uptimeVal') || 0;\nvar todayEnergyVal = flow.get('todayEnergy') || 0;\nvar yesterdayEnergyVal = flow.get('yesterdayEnergy') || 0;\nvar totalEnergyVal = flow.get('totalEnergy') || 0;\n\nvar currentdate = new Date();\nvar datetime = currentdate.getDate() + \"/\" + (currentdate.getMonth()+1) + \"/\" + currentdate.getFullYear() + \" - \" + currentdate.getHours() + \":\" +currentdate.getMinutes() + \":\" + currentdate.getSeconds() + \"\\n\";\n\nmsg.payload = datetime + \"\\nDati CONTATORE:\\nTensione: \" + voltageVal + \" V\\nCorrente: \" + currentVal + \" A\\nPotenza Attuale: \" + powerVal.toFixed(2) + \" W\\nEnergia oggi: \" + todayEnergyVal.toFixed(2) + \" kWh\\nEnergia ieri: \" + yesterdayEnergyVal.toFixed(2) + \" kWh\\nEnergia totale: \" + totalEnergyVal.toFixed(2) + \"kWh\\nUptime: \" + uptimeVal +  \" s\\n\";\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1830,
-        "y": 700,
+        "x": 1230,
+        "y": 520,
         "wires": [
             [
                 "d3448d4c.47663"
@@ -2129,8 +2081,8 @@
         "z": "f6bd4cff.b20c7",
         "name": "Comandi Telegram",
         "info": "",
-        "x": 1650,
-        "y": 660,
+        "x": 850,
+        "y": 520,
         "wires": []
     },
     {
@@ -2139,8 +2091,8 @@
         "z": "f6bd4cff.b20c7",
         "name": "Pulsante refresh",
         "info": "",
-        "x": 120,
-        "y": 640,
+        "x": 100,
+        "y": 580,
         "wires": []
     },
     {
@@ -2152,8 +2104,8 @@
         "qos": "2",
         "datatype": "auto",
         "broker": "ee95ae30.7fefe8",
-        "x": 160,
-        "y": 200,
+        "x": 140,
+        "y": 80,
         "wires": [
             [
                 "3725c2fa.5176fe"
@@ -2334,8 +2286,8 @@
         "retentionPolicyV18Flux": "",
         "org": "",
         "bucket": "",
-        "x": 1120,
-        "y": 440,
+        "x": 860,
+        "y": 360,
         "wires": []
     },
     {
@@ -2417,16 +2369,22 @@
         "type": "function",
         "z": "7aa2da03.bd1f7c",
         "name": "DHT11 only",
-        "func": "var temperatureVal;\nvar humidityVal;\n\nif('StatusSNS' in msg.payload){\n    temperatureVal = msg.payload.StatusSNS.DHT11.Temperature;\n    humidityVal = msg.payload.StatusSNS.DHT11.Humidity;\n}\nelse{\n    temperatureVal = msg.payload.DHT11.Temperature;\n    humidityVal = msg.payload.DHT11.Humidity;\n}\n\n\nmsg.payload = {\n    temperature : temperatureVal,\n    humidity : humidityVal\n}\n\nreturn msg;",
+        "func": "var temperatureVal = msg.payload.DHT11.Temperature;\nvar humidityVal = msg.payload.DHT11.Humidity;\nvar dewPointVal = msg.payload.DHT11.DewPoint;\n\nmsg.payload = {\n    temperature : temperatureVal,\n    humidity : humidityVal,\n    dewPoint : dewPointVal\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 530,
+        "initialize": "",
+        "finalize": "",
+        "x": 550,
         "y": 80,
         "wires": [
             [
                 "27f1efc7.af3298",
                 "ba3be3d8.facc9",
-                "57c40ffd.0676e"
+                "57c40ffd.0676e",
+                "81290510.9d6a68",
+                "d7469667.7ffcc8",
+                "908f0c77.498a3",
+                "baa1bc02.1958a8"
             ]
         ]
     },
@@ -2481,14 +2439,20 @@
         "func": "var temperatureVal;\nvar humidityVal;\nvar luminosityVal\n\nif('StatusSNS' in msg.payload){\n    temperatureVal = msg.payload.StatusSNS.DHT11.Temperature;\n    humidityVal = msg.payload.StatusSNS.DHT11.Humidity;\n    luminosityVal = msg.payload.StatusSNS.ANALOG.A0;\n}\nelse{\n    temperatureVal = msg.payload.DHT11.Temperature;\n    humidityVal = msg.payload.DHT11.Humidity;\n    luminosityVal = msg.payload.ANALOG.A0;\n}\n\nluminosityVal = -(luminosityVal - 1024) * 100 / 1024;\n\nmsg.payload = {\n    temperature : temperatureVal,\n    humidity : humidityVal,\n    luminosity : luminosityVal\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
         "x": 600,
         "y": 60,
         "wires": [
             [
-                "d3f1018d.e5a5d8",
-                "40dcf2b3.2e95e4",
-                "6fe9c13a.3298a",
-                "951d377e.4b4cc8"
+                "951d377e.4b4cc8",
+                "6f566e70.9d28f8",
+                "cf05317f.e29f08",
+                "e60d0d28.c3aea",
+                "63e987bb.ee25d",
+                "9c21170b.edb928",
+                "bb71adea.0d543",
+                "3e4fff7f.f853b8"
             ]
         ]
     },
@@ -2508,42 +2472,6 @@
         "x": 850,
         "y": 320,
         "wires": []
-    },
-    {
-        "id": "d3f1018d.e5a5d8",
-        "type": "function",
-        "z": "f2a638ae.d93ca8",
-        "name": "Esporta dati temperatura",
-        "func": "var serverTempVal=flow.get('server_temp') || 0;\nvar serverMaxTempVal=flow.get('server_max_temp') || 0;\nvar serverMinTempVal=flow.get('server_min_temp') || 50;\n\nserverTempVal = msg.payload.temperature;\n\nif (serverTempVal<serverMinTempVal){\n    serverMinTempVal = serverTempVal;\n}\n\nif (serverTempVal>serverMaxTempVal){\n    serverMaxTempVal = serverTempVal;\n}\n\nflow.set('server_temp', serverTempVal);\nflow.set('server_max_temp', serverMaxTempVal);\nflow.set('server_min_temp', serverMinTempVal);\n\nmsg.payload = {\n    temperature : serverTempVal,\n    serverMaxTemp : serverMaxTempVal,\n    serverMinTemp : serverMinTempVal\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 870,
-        "y": 60,
-        "wires": [
-            [
-                "b86fc693.a4c28",
-                "1ccfd3f9.01f59c",
-                "ebf5bd04.0b50d"
-            ]
-        ]
-    },
-    {
-        "id": "40dcf2b3.2e95e4",
-        "type": "function",
-        "z": "f2a638ae.d93ca8",
-        "name": "Esporta dati umidità",
-        "func": "var serverUmidVal=flow.get('server_umid') || 0;\nvar serverMaxUmidVal=flow.get('server_max_umid') || 0;\nvar serverMinUmidVal=flow.get('server_min_umid') || 50;\n\nserverUmidVal = msg.payload.humidity;\n\nif (serverUmidVal<serverMinUmidVal){\n    serverMinUmidVal = serverUmidVal;\n}\n\nif (serverUmidVal>serverMaxUmidVal){\n    serverMaxUmidVal = serverUmidVal;\n}\n\nflow.set('server_umid', serverUmidVal);\nflow.set('server_max_umid', serverMaxUmidVal);\nflow.set('server_min_umid', serverMinUmidVal);\n\nmsg.payload = {\n    humidity : serverUmidVal,\n    serverMaxUmid : serverMaxUmidVal,\n    serverMinUmid : serverMinUmidVal\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 860,
-        "y": 180,
-        "wires": [
-            [
-                "ccbb4d36.3075f8",
-                "34719d4b.3b25ca",
-                "5df712ed.890dcc"
-            ]
-        ]
     },
     {
         "id": "263e3a1a.5452c6",
@@ -2567,10 +2495,14 @@
         "y": 80,
         "wires": [
             [
-                "72fc6816.c61578",
-                "dd16b312.3a358",
-                "60746f85.3995b",
-                "5a316a4d.6aca64"
+                "5a316a4d.6aca64",
+                "6845a8ff.f63ab8",
+                "46e1d34d.6e19dc",
+                "a0830f7c.ef271",
+                "c53021ab.53a1b8",
+                "5db9cbfb.524e2c",
+                "f0029b69.43b728",
+                "bae403d5.faf458"
             ]
         ]
     },
@@ -2588,58 +2520,6 @@
         "wires": [
             [
                 "dff40ef.b2f077"
-            ]
-        ]
-    },
-    {
-        "id": "72fc6816.c61578",
-        "type": "function",
-        "z": "46a757ab.7b1178",
-        "name": "Esporta dati temperatura",
-        "func": "var salaTempVal=flow.get('sala_temp') || 0;\nvar salaMaxTempVal=flow.get('sala_max_temp') || 0;\nvar salaMinTempVal=flow.get('sala_min_temp') || 50;\n\nsalaTempVal = msg.payload.temperature;\n\nif (salaTempVal<salaMinTempVal){\n    salaMinTempVal = salaTempVal;\n}\n\nif (salaTempVal>salaMaxTempVal){\n    salaMaxTempVal = salaTempVal;\n}\n\nflow.set('sala_temp', salaTempVal);\nflow.set('sala_max_temp', salaMaxTempVal);\nflow.set('sala_min_temp', salaMinTempVal);\n\nmsg.payload = {\n    temperature : salaTempVal,\n    salaMaxTemp : salaMaxTempVal,\n    salaMinTemp : salaMinTempVal\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 810,
-        "y": 80,
-        "wires": [
-            [
-                "942c5b80.3baf6",
-                "ea89634c.b66e4",
-                "dc4f7c3c.a32ee8"
-            ]
-        ]
-    },
-    {
-        "id": "dd16b312.3a358",
-        "type": "function",
-        "z": "46a757ab.7b1178",
-        "name": "Esporta dati umidità",
-        "func": "var salaUmidVal=flow.get('sala_umid') || 0;\nvar salaMaxUmidVal=flow.get('sala_max_umid') || 0;\nvar salaMinUmidVal=flow.get('sala_min_umid') || 50;\n\nsalaUmidVal = msg.payload.humidity;\n\nif (salaUmidVal<salaMinUmidVal){\n    salaMinUmidVal = salaUmidVal;\n}\n\nif (salaUmidVal>salaMaxUmidVal){\n    salaMaxUmidVal = salaUmidVal;\n}\n\nflow.set('sala_umid', salaUmidVal);\nflow.set('sala_max_umid', salaMaxUmidVal);\nflow.set('sala_min_umid', salaMinUmidVal);\n\nmsg.payload = {\n    humidity : salaUmidVal,\n    salaMaxUmid : salaMaxUmidVal,\n    salaMinUmid : salaMinUmidVal\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 800,
-        "y": 200,
-        "wires": [
-            [
-                "33ec2d9b.4eb6ba",
-                "b92922cc.0eb408",
-                "cfcc574.2335228"
-            ]
-        ]
-    },
-    {
-        "id": "60746f85.3995b",
-        "type": "function",
-        "z": "46a757ab.7b1178",
-        "name": "Esporta dati luminosità",
-        "func": "flow.set('sala_lum', msg.payload.luminosity);\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 800,
-        "y": 320,
-        "wires": [
-            [
-                "5b97b057.bb532"
             ]
         ]
     },
@@ -3640,7 +3520,7 @@
         "z": "af47c860.21273",
         "name": "",
         "group": "75c39fed.9491e8",
-        "order": 2,
+        "order": 1,
         "width": 3,
         "height": 2,
         "gtype": "gage",
@@ -3666,7 +3546,7 @@
         "z": "af47c860.21273",
         "name": "",
         "group": "75c39fed.9491e8",
-        "order": 3,
+        "order": 2,
         "width": 3,
         "height": 2,
         "gtype": "gage",
@@ -3692,7 +3572,7 @@
         "z": "af47c860.21273",
         "name": "",
         "group": "75c39fed.9491e8",
-        "order": 4,
+        "order": 3,
         "width": 3,
         "height": 2,
         "gtype": "gage",
@@ -3945,13 +3825,13 @@
         "z": "d4025d43.ce8fc",
         "name": "Umidità",
         "group": "99f13696.ef7c58",
-        "order": 3,
+        "order": 2,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Umidità",
         "label": "%",
-        "format": "{{msg.payload.humidity}}",
+        "format": "{{msg.payload}}",
         "min": 0,
         "max": "100",
         "colors": [
@@ -3971,13 +3851,13 @@
         "z": "d4025d43.ce8fc",
         "name": "Temperatura",
         "group": "99f13696.ef7c58",
-        "order": 2,
+        "order": 1,
         "width": 3,
         "height": 2,
         "gtype": "gage",
         "title": "Temperatura",
         "label": "°C",
-        "format": "{{msg.payload.temperature}}",
+        "format": "{{msg.payload}}",
         "min": "0",
         "max": "50",
         "colors": [
@@ -3996,7 +3876,7 @@
         "type": "ui_text",
         "z": "d4025d43.ce8fc",
         "group": "99f13696.ef7c58",
-        "order": 4,
+        "order": 3,
         "width": 3,
         "height": 1,
         "name": "TMAX",
@@ -4012,7 +3892,7 @@
         "type": "ui_text",
         "z": "d4025d43.ce8fc",
         "group": "99f13696.ef7c58",
-        "order": 6,
+        "order": 5,
         "width": 3,
         "height": 1,
         "name": "TMIN",
@@ -4028,7 +3908,7 @@
         "type": "ui_text",
         "z": "d4025d43.ce8fc",
         "group": "99f13696.ef7c58",
-        "order": 5,
+        "order": 4,
         "width": 3,
         "height": 1,
         "name": "H MAX",
@@ -4044,7 +3924,7 @@
         "type": "ui_text",
         "z": "d4025d43.ce8fc",
         "group": "99f13696.ef7c58",
-        "order": 7,
+        "order": 6,
         "width": 3,
         "height": 1,
         "name": "H MIN",
@@ -4164,7 +4044,7 @@
         "retentionPolicyV18Flux": "",
         "org": "",
         "bucket": "",
-        "x": 870,
+        "x": 880,
         "y": 340,
         "wires": []
     },
@@ -5125,8 +5005,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "ee95ae30.7fefe8",
-        "x": 1820,
-        "y": 520,
+        "x": 1320,
+        "y": 400,
         "wires": []
     },
     {
@@ -5137,8 +5017,8 @@
         "func": "var maxPower = 3400;\nif (msg.payload.hasOwnProperty('power')){\n    if(msg.payload.power > maxPower){\n        msg.rce = \"RICARICA NISSAN: Richiesta sgancio per potenza totale elevata (\" + msg.payload.power + \" kW)\";\n        msg.payload = 0;\n        return msg;\n    }\n}\nreturn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1040,
-        "y": 520,
+        "x": 780,
+        "y": 400,
         "wires": [
             [
                 "46e6fbd.324e284"
@@ -5180,8 +5060,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1740,
-        "y": 560,
+        "x": 1240,
+        "y": 440,
         "wires": [
             [
                 "dc911276.ae62d8"
@@ -5226,8 +5106,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": true,
-        "x": 1320,
-        "y": 520,
+        "x": 980,
+        "y": 400,
         "wires": [
             [
                 "92066fbf.987e3",
@@ -5246,8 +5126,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "ee95ae30.7fefe8",
-        "x": 1950,
-        "y": 600,
+        "x": 1480,
+        "y": 480,
         "wires": []
     },
     {
@@ -5992,8 +5872,8 @@
         "qos": "",
         "retain": "",
         "broker": "ee95ae30.7fefe8",
-        "x": 1940,
-        "y": 560,
+        "x": 1460,
+        "y": 440,
         "wires": []
     },
     {
@@ -6053,8 +5933,8 @@
         "label": "Corrente",
         "format": "{{msg.payload.current}} A",
         "layout": "row-spread",
-        "x": 1020,
-        "y": 160,
+        "x": 760,
+        "y": 120,
         "wires": []
     },
     {
@@ -6069,8 +5949,8 @@
         "label": "Tensione",
         "format": "{{msg.payload.voltage}} V",
         "layout": "row-spread",
-        "x": 1020,
-        "y": 120,
+        "x": 760,
+        "y": 80,
         "wires": []
     },
     {
@@ -6078,7 +5958,7 @@
         "type": "ui_level",
         "z": "f6bd4cff.b20c7",
         "group": "58065d19.b74584",
-        "order": 10,
+        "order": 1,
         "width": 0,
         "height": 0,
         "name": "",
@@ -6110,8 +5990,8 @@
         "tickmode": "off",
         "peakmode": true,
         "peaktime": "3000",
-        "x": 1210,
-        "y": 240,
+        "x": 950,
+        "y": 200,
         "wires": []
     },
     {
@@ -6119,7 +5999,7 @@
         "type": "ui_level",
         "z": "73b7c891.499c78",
         "group": "58065d19.b74584",
-        "order": 10,
+        "order": 2,
         "width": 0,
         "height": 0,
         "name": "",
@@ -6187,7 +6067,7 @@
         "type": "ui_level",
         "z": "e987eb50.a7ba78",
         "group": "58065d19.b74584",
-        "order": 10,
+        "order": 3,
         "width": 0,
         "height": 0,
         "name": "",
@@ -6484,8 +6364,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 1300,
-        "y": 560,
+        "x": 780,
+        "y": 440,
         "wires": [
             [
                 "dfe63515.42ccd"
@@ -6500,8 +6380,8 @@
         "func": "var powerVal = flow.get('powerVal') || 0;\nif (powerVal < 1000.0){\n    msg.rce = \"RICARICA NISSAN: Ripresa ricarica automatica\";\n    msg.payload = 1;\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1350,
-        "y": 600,
+        "x": 970,
+        "y": 440,
         "wires": [
             []
         ]
@@ -7255,8 +7135,8 @@
         "qos": "2",
         "datatype": "auto",
         "broker": "ee95ae30.7fefe8",
-        "x": 180,
-        "y": 680,
+        "x": 160,
+        "y": 620,
         "wires": [
             [
                 "fd8be8fe.4436d8"
@@ -7808,8 +7688,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1730,
-        "y": 600,
+        "x": 1230,
+        "y": 480,
         "wires": [
             [
                 "db843270.a24648",
@@ -7986,8 +7866,8 @@
         "func": "msg.payload = msg.payload.power.toFixed(0)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1010,
-        "y": 200,
+        "x": 750,
+        "y": 160,
         "wires": [
             [
                 "49be6c5.5b61f94",
@@ -8786,8 +8666,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "ee95ae30.7fefe8",
-        "x": 2010,
-        "y": 640,
+        "x": 1510,
+        "y": 520,
         "wires": []
     },
     {
@@ -10757,8 +10637,8 @@
         "queryOnly": false,
         "bufferRangeCelsius": 2,
         "nora": "e264142d.421a28",
-        "x": 810,
-        "y": 60,
+        "x": 820,
+        "y": 380,
         "wires": [
             []
         ]
@@ -10919,12 +10799,11 @@
         "id": "638528a3.1668b8",
         "type": "noraf-light",
         "z": "295673c6.e0b2c4",
-        "d": true,
         "devicename": "Luce Prova",
         "lightcolor": false,
         "brightnesscontrol": true,
         "commandonlycolor": false,
-        "turnonwhenbrightnesschanges": false,
+        "turnonwhenbrightnesschanges": true,
         "passthru": true,
         "statepayload": true,
         "brightnessoverride": "",
@@ -11847,5 +11726,371 @@
                 "c4d71d47.b98f2"
             ]
         ]
+    },
+    {
+        "id": "f0029b69.43b728",
+        "type": "influxdb in",
+        "z": "46a757ab.7b1178",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "from(bucket: \"Home/autogen\") \n|> range(start: -1d)\n|> filter(fn:(r) =>\n    r._measurement == \"livingRoom\" and\n    r._field == \"humidity\"\n  )\n|> min()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 830,
+        "y": 280,
+        "wires": [
+            [
+                "b92922cc.0eb408"
+            ]
+        ]
+    },
+    {
+        "id": "5db9cbfb.524e2c",
+        "type": "influxdb in",
+        "z": "46a757ab.7b1178",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "from(bucket: \"Home/autogen\") \n|> range(start: -1d)\n|> filter(fn:(r) =>\n    r._measurement == \"livingRoom\" and\n    r._field == \"humidity\"\n  )\n|> max()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 830,
+        "y": 240,
+        "wires": [
+            [
+                "cfcc574.2335228"
+            ]
+        ]
+    },
+    {
+        "id": "a0830f7c.ef271",
+        "type": "influxdb in",
+        "z": "46a757ab.7b1178",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "from(bucket: \"Home/autogen\") \n|> range(start: -1d)\n|> filter(fn:(r) =>\n    r._measurement == \"livingRoom\" and\n    r._field == \"temperature\"\n  )\n|> min()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 830,
+        "y": 160,
+        "wires": [
+            [
+                "942c5b80.3baf6"
+            ]
+        ]
+    },
+    {
+        "id": "46e1d34d.6e19dc",
+        "type": "influxdb in",
+        "z": "46a757ab.7b1178",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "from(bucket: \"Home/autogen\") \n|> range(start: -1d)\n|> filter(fn:(r) =>\n    r._measurement == \"livingRoom\" and\n    r._field == \"temperature\"\n  )\n|> max()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 830,
+        "y": 120,
+        "wires": [
+            [
+                "ea89634c.b66e4"
+            ]
+        ]
+    },
+    {
+        "id": "6845a8ff.f63ab8",
+        "type": "change",
+        "z": "46a757ab.7b1178",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperature",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "sala_temp",
+                "pt": "flow",
+                "to": "payload.temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 80,
+        "wires": [
+            [
+                "dc4f7c3c.a32ee8"
+            ]
+        ]
+    },
+    {
+        "id": "c53021ab.53a1b8",
+        "type": "change",
+        "z": "46a757ab.7b1178",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.humidity",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "sala_umid",
+                "pt": "flow",
+                "to": "payload.humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 200,
+        "wires": [
+            [
+                "33ec2d9b.4eb6ba"
+            ]
+        ]
+    },
+    {
+        "id": "bae403d5.faf458",
+        "type": "change",
+        "z": "46a757ab.7b1178",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.liminosity",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "sala_lum",
+                "pt": "flow",
+                "to": "payload.liminosity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 320,
+        "wires": [
+            [
+                "5b97b057.bb532"
+            ]
+        ]
+    },
+    {
+        "id": "bb71adea.0d543",
+        "type": "influxdb in",
+        "z": "f2a638ae.d93ca8",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "from(bucket: \"Home/autogen\") \n|> range(start: -1d)\n|> filter(fn:(r) =>\n    r._measurement == \"livingRoom\" and\n    r._field == \"humidity\"\n  )\n|> min()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 890,
+        "y": 260,
+        "wires": [
+            [
+                "5df712ed.890dcc"
+            ]
+        ]
+    },
+    {
+        "id": "9c21170b.edb928",
+        "type": "influxdb in",
+        "z": "f2a638ae.d93ca8",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "from(bucket: \"Home/autogen\") \n|> range(start: -1d)\n|> filter(fn:(r) =>\n    r._measurement == \"livingRoom\" and\n    r._field == \"humidity\"\n  )\n|> max()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 890,
+        "y": 220,
+        "wires": [
+            [
+                "ccbb4d36.3075f8"
+            ]
+        ]
+    },
+    {
+        "id": "e60d0d28.c3aea",
+        "type": "influxdb in",
+        "z": "f2a638ae.d93ca8",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "from(bucket: \"Home/autogen\") \n|> range(start: -1d)\n|> filter(fn:(r) =>\n    r._measurement == \"livingRoom\" and\n    r._field == \"temperature\"\n  )\n|> min()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 890,
+        "y": 140,
+        "wires": [
+            [
+                "ebf5bd04.0b50d"
+            ]
+        ]
+    },
+    {
+        "id": "cf05317f.e29f08",
+        "type": "influxdb in",
+        "z": "f2a638ae.d93ca8",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "from(bucket: \"Home/autogen\") \n|> range(start: -1d)\n|> filter(fn:(r) =>\n    r._measurement == \"livingRoom\" and\n    r._field == \"temperature\"\n  )\n|> max()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 890,
+        "y": 100,
+        "wires": [
+            [
+                "1ccfd3f9.01f59c"
+            ]
+        ]
+    },
+    {
+        "id": "6f566e70.9d28f8",
+        "type": "change",
+        "z": "f2a638ae.d93ca8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperature",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "server_temp",
+                "pt": "flow",
+                "to": "payload.temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 60,
+        "wires": [
+            [
+                "b86fc693.a4c28"
+            ]
+        ]
+    },
+    {
+        "id": "63e987bb.ee25d",
+        "type": "change",
+        "z": "f2a638ae.d93ca8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.humidity",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "server_umid",
+                "pt": "flow",
+                "to": "payload.humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 180,
+        "wires": [
+            [
+                "34719d4b.3b25ca"
+            ]
+        ]
+    },
+    {
+        "id": "3e4fff7f.f853b8",
+        "type": "change",
+        "z": "f2a638ae.d93ca8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.liminosity",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "server_lum",
+                "pt": "flow",
+                "to": "payload.liminosity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 300,
+        "wires": [
+            [
+                "6aee73a9.89d104"
+            ]
+        ]
+    },
+    {
+        "id": "730e9f6.cef6ce",
+        "type": "comment",
+        "z": "f6bd4cff.b20c7",
+        "name": "SonOff Contatore - 192.168.0.77",
+        "info": "",
+        "x": 850,
+        "y": 40,
+        "wires": []
     }
 ]
