@@ -724,7 +724,7 @@
         "type": "ui_group",
         "name": "Primo Piano",
         "tab": "2d75dba2.a41bd4",
-        "order": 2,
+        "order": 3,
         "disp": true,
         "width": "6",
         "collapse": false
@@ -744,7 +744,7 @@
         "type": "ui_group",
         "name": "Soffitta",
         "tab": "2d75dba2.a41bd4",
-        "order": 4,
+        "order": 5,
         "disp": true,
         "width": "6",
         "collapse": false
@@ -783,6 +783,16 @@
         "twofactorpin": "",
         "localexecution": true,
         "structure": "Campo"
+    },
+    {
+        "id": "d4c9b167.50a47",
+        "type": "ui_group",
+        "name": "Ventola cucina",
+        "tab": "2d75dba2.a41bd4",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
     },
     {
         "id": "dc4f7c3c.a32ee8",
@@ -5264,7 +5274,7 @@
         "label": "% to charge",
         "tooltip": "",
         "group": "4f75689c.e4dd2",
-        "order": 7,
+        "order": 6,
         "width": 0,
         "height": 0,
         "wrap": true,
@@ -5288,7 +5298,7 @@
         "type": "ui_level",
         "z": "e987eb50.a7ba78",
         "group": "4f75689c.e4dd2",
-        "order": 10,
+        "order": 9,
         "width": 0,
         "height": 0,
         "name": "",
@@ -5488,7 +5498,7 @@
         "type": "ui_text",
         "z": "e987eb50.a7ba78",
         "group": "4f75689c.e4dd2",
-        "order": 8,
+        "order": 7,
         "width": 0,
         "height": 0,
         "name": "",
@@ -5716,7 +5726,7 @@
         "z": "e987eb50.a7ba78",
         "name": "Reset",
         "group": "4f75689c.e4dd2",
-        "order": 3,
+        "order": 2,
         "width": 3,
         "height": 1,
         "passthru": true,
@@ -5746,7 +5756,7 @@
         "z": "e987eb50.a7ba78",
         "name": "Full",
         "group": "4f75689c.e4dd2",
-        "order": 4,
+        "order": 3,
         "width": 2,
         "height": 1,
         "passthru": true,
@@ -7704,13 +7714,6 @@
                 "pt": "msg",
                 "to": "rce",
                 "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "rce",
-                "pt": "flow",
-                "to": "rce",
-                "tot": "msg"
             }
         ],
         "action": "",
@@ -9147,8 +9150,8 @@
         "type": "ui_button",
         "z": "5b5ae0eb.cb95b",
         "name": "Pulsante switch interruttore",
-        "group": "261dd92c.ffff5e",
-        "order": 5,
+        "group": "d4c9b167.50a47",
+        "order": 1,
         "width": 5,
         "height": 1,
         "passthru": false,
@@ -9644,7 +9647,7 @@
         "id": "f9f3406e.719e2",
         "type": "ui_led",
         "z": "e987eb50.a7ba78",
-        "order": 6,
+        "order": 5,
         "group": "4f75689c.e4dd2",
         "width": 0,
         "height": 0,
@@ -10342,8 +10345,8 @@
         "id": "24cf0f75.840ae",
         "type": "ui_led",
         "z": "5b5ae0eb.cb95b",
-        "order": 6,
-        "group": "261dd92c.ffff5e",
+        "order": 2,
+        "group": "d4c9b167.50a47",
         "width": 1,
         "height": 1,
         "label": "",
@@ -10876,8 +10879,8 @@
         "type": "function",
         "z": "e987eb50.a7ba78",
         "name": "Charge Controller v3.0",
-        "func": "const STANDBY_POWER = 100;\nconst MAX_POWER = 3400;\nconst CAR_CAPACITY = 40.0; //kWh\n\nfunction PowerMonitor(){\n    this.power = 0.0;\n    this.update = function(powerVal){\n        this.power = powerVal;\n    }\n    this.getPower = function(){\n        return this.power;\n    }\n    this.getStatus = function(){\n        if(this.power > MAX_POWER){\n            return \"Overload\";\n        }\n        else if(this.power >= STANDBY_POWER){\n            return \"Charging\";\n        }\n        else if (this.power == 0){\n            return \"Off\";\n        }\n        else if (this.power < STANDBY_POWER){\n            return \"Standby\";\n        }\n    }\n}\nlet powerMonitor = context.get('powerMonitor') || new PowerMonitor();\n\nfunction ChargeController(){\n    this.energyTotalVal;\n    this.energyStartChargeVal;\n    this.energyStopChargeVal;\n    this.update = function(energyVal){\n        this.energyTotalVal = energyVal;\n    }\n    this.startCharge = function(percToCharge){\n        this.energyStartChargeVal = this.energyTotalVal;\n        this.energyCharged = 0;\n        this.energyStopChargeVal = Number(CAR_CAPACITY / 100.0 * percToCharge + this.energyStartChargeVal);\n    }\n    this.getEnergyVal = function(){\n        return this.energyTotalVal;\n    }\n    this.stopCharge = function(){\n        this.energyStopChargeVal = this.energyTotalVal;\n        this.energyCharged = this.energyTotalVal - this.energyStartChargeVal;\n    }\n    this.getStatus = function(){\n        if(this.energyTotalVal >= this.energyStopChargeVal){\n            return \"Charged\";\n        }\n        else{\n            return \"Charging\";\n        }\n    }\n    this.getEnergyToCharge = function(){\n        return this.energyStopChargeVal - this.energyStartChargeVal;\n    }\n    this.getChargedEnergy = function(){\n        return this.energyTotalVal - this.energyStartChargeVal;\n    }\n    this.getRemainingEnergy = function(){\n        return this.energyStopChargeVal - this.energyTotalVal;\n    }\n    this.getRemaingTime = function(powerVal){\n        let timeLeft = new Date((this.getRemainingEnergy() * 1000) / powerVal * 3600000);\n        return timeLeft.getHours()-1 + \" ore \" + timeLeft.getMinutes() + \" min\";\n    }\n}\nlet chargeController = context.get('chargeController') || new ChargeController();\n\nfunction TimeSlotMonitor(){\n    this.currentDate;\n    this.triggerDate;\n    this.remainingTime;\n    this.update = function(){\n        this.currentDate = new Date();\n        this.triggerDate = new Date();\n        this.triggerDate.setHours(23);\n        this.triggerDate.setMinutes(0);\n        this.remainingTime = new Date(this.triggerDate - this.currentDate);\n    }\n    this.isEconomyTime = function(){\n        return (this.currentDate > this.triggerDate || this.currentDate.getDay() == 0); //Week start on Sunday/0. \n    }\n    this.getRemaingTime = function(){\n        return this.remainingTime.getTime();\n    }\n    this.getRedeableRemaingTime = function(){\n        return this.remainingTime.getHours()-1 + \" ore e \" + this.remainingTime.getMinutes() + \" minuti\";\n    }\n    this.getTriggerDate = function(){\n        return this.triggerDate;\n    }\n}\nlet timeSlotMonitor = context.get('timeSlotMonitor') || new TimeSlotMonitor();\ntimeSlotMonitor.update();\n\nif (msg.topic == \"tele/tasmotaContatore/SENSOR\"){\n    if(msg.payload.ENERGY.Power > MAX_POWER){\n        msg.payload = 0;\n        msg.rce = \"Supero potenza di \" + (msg.payload.ENERGY.Power - MAX_POWER) + \"W\";\n        chargeController.stopCharge();\n        node.send(msg);\n    }\n}\n\nif (msg.topic == \"tele/tasmotaRicaricaNissan/SENSOR\"){\n    chargeController.update(msg.payload.ENERGY.Total);\n    powerMonitor.update(msg.payload.ENERGY.Power);\n    msg2 = {};\n    if (chargeController.getStatus() == \"Charged\" && powerMonitor.getStatus() != \"Off\"){\n        chargeController.stopCharge();\n        msg.payload = 0;\n        msg.rce = \"Ricarica completata (\" + chargeController.getChargedEnergy() + \"kWh)\";\n        msg2 = {\n            \"remainingTime\" : \"Ricarica terminata\",\n            \"remainingEnergy\" : \"0\",\n            \"energyToCharge\" : 0,\n            \"percentageDone\" : 100\n        };\n        return [{}, msg2];\n    }\n    if (chargeController.getStatus() == \"Charging\"){\n        msg2 = {\n            \"remainingTime\" : chargeController.getRemaingTime(powerMonitor.getPower()),\n            \"remainingEnergy\" : chargeController.getRemainingEnergy(),\n            \"energyToCharge\" : chargeController.getEnergyToCharge(),\n            \"percentageDone\" : 0\n        };\n        return [{}, msg2];\n    }\n}\n\nlet timedOutActivation = context.get('timedOutActivation') || 0;\nif (msg.topic == \"percToCharge\"){\n    if (msg.payload > 0){\n        if (timeSlotMonitor.isEconomyTime()){\n            chargeController.startCharge(msg.payload);\n            msg.payload = 1;\n            msg.rce = \"Avvio ricarica di \" + chargeController.getEnergyToCharge() + \"kWh\";\n        }\n        else{\n            msg.rce = \"Ricarica prenotata. Inserzione tra \" + timeSlotMonitor.getRedeableRemaingTime();\n            msg.payload = 0;\n            timedOutActivation = setTimeout(function(){\n                chargeController.startCharge(msg.payload);\n                msg.payload = 1;\n                msg.rce = \"Avvio ricarica prenotata di \" + chargeController.getEnergyToCharge() + \"kWh\";\n                node.send(msg);\n            }, timeSlotMonitor.getRemaingTime());\n        }\n    }\n    else{\n        chargeController.stopCharge();\n        clearTimeout(timedOutActivation);\n        msg.rce = \"Ricarica annullata\";\n    }\n    node.send(msg);\n}\n\nif (msg.topic == \"forceCharge\"){\n    chargeController.startCharge(100);\n    msg.payload = 1;\n    msg.rce = \"Avvio ricarica forzata\";\n    node.send(msg);\n}\n\ncontext.set('timedOutActivation', timedOutActivation);\ncontext.set('timeSlotMonitor', timeSlotMonitor);\ncontext.set('powerMonitor', powerMonitor);\ncontext.set('chargeController', chargeController);\nreturn;",
-        "outputs": 2,
+        "func": "const STANDBY_POWER = 100;\nconst MAX_POWER = 3400;\nconst CAR_CAPACITY = 40.0; //kWh\nvar enableDebug = true;\ndebug = {};\n\nfunction PowerMonitor(){\n    this.power = 0.0;\n    this.update = function(powerVal){\n        this.power = powerVal;\n    }\n    this.getPower = function(){\n        return this.power;\n    }\n    this.getStatus = function(){\n        if(this.power > MAX_POWER){\n            return \"Overload\";\n        }\n        else if(this.power >= STANDBY_POWER){\n            return \"Charging\";\n        }\n        else if (this.power == 0){\n            return \"Off\";\n        }\n        else if (this.power < STANDBY_POWER){\n            return \"Standby\";\n        }\n    }\n}\nlet powerMonitor = context.get('powerMonitor') || new PowerMonitor();\n\nfunction ChargeController(){\n    this.energyTotalVal;\n    this.energyStartChargeVal = 0;\n    this.energyStopChargeVal = 0;\n    this.update = function(energyVal){\n        this.energyTotalVal = energyVal;\n    }\n    this.startCharge = function(percToCharge){\n        this.energyStartChargeVal = this.energyTotalVal;\n        this.energyCharged = 0;\n        this.energyStopChargeVal = Number(CAR_CAPACITY / 100.0 * percToCharge + this.energyStartChargeVal);\n    }\n    this.getEnergyVal = function(){\n        return this.energyTotalVal;\n    }\n    this.stopCharge = function(){\n        this.energyStopChargeVal = this.energyTotalVal;\n        this.energyCharged = this.energyTotalVal - this.energyStartChargeVal;\n    }\n    this.getStatus = function(){\n        if(this.energyTotalVal >= this.energyStopChargeVal){\n            return \"Charged\";\n        }\n        else{\n            return \"Charging\";\n        }\n    }\n    this.getEnergyToCharge = function(){\n        return this.energyStopChargeVal - this.energyStartChargeVal;\n    }\n    this.getChargedEnergy = function(){\n        return this.energyTotalVal - this.energyStartChargeVal;\n    }\n    this.getRemainingEnergy = function(){\n        return this.energyStopChargeVal - this.energyTotalVal;\n    }\n    this.getRemaingTime = function(powerVal){\n        let timeLeft = new Date((this.getRemainingEnergy() * 1000) / powerVal * 3600000);\n        return timeLeft.getHours()-1 + \" ore \" + timeLeft.getMinutes() + \" min\";\n    }\n    this.getEnergyTotal = function(){\n        return this.energyTotalVal;\n    }\n    this.getEnergyStartChargeVal =  function(){\n        return this.energyStartChargeVal;\n    }\n    this.getEnergyStopChargeVal =  function(){\n        return this.energyStopChargeVal;\n    }\n}\nlet chargeController = context.get('chargeController') || new ChargeController();\n\nfunction TimeSlotMonitor(){\n    this.currentDate;\n    this.triggerDate;\n    this.remainingTime;\n    this.update = function(){\n        this.currentDate = new Date();\n        this.triggerDate = new Date();\n        this.triggerDate.setHours(23);\n        this.triggerDate.setMinutes(0);\n        this.remainingTime = new Date(this.triggerDate - this.currentDate);\n    }\n    this.isEconomyTime = function(){\n        return (this.currentDate > this.triggerDate || this.currentDate.getDay() == 0); //Week start on Sunday/0. \n    }\n    this.getRemaingTime = function(){\n        return this.remainingTime.getTime();\n    }\n    this.getRedeableRemaingTime = function(){\n        return this.remainingTime.getHours()-1 + \" ore e \" + this.remainingTime.getMinutes() + \" minuti\";\n    }\n    this.getTriggerDate = function(){\n        return this.triggerDate;\n    }\n}\nlet timeSlotMonitor = context.get('timeSlotMonitor') || new TimeSlotMonitor();\ntimeSlotMonitor.update();\n\nif (msg.topic == \"tele/tasmotaContatore/SENSOR\"){\n    if(msg.payload.ENERGY.Power > MAX_POWER){\n        msg.payload = 0;\n        msg.rce = \"Supero potenza di \" + (msg.payload.ENERGY.Power - MAX_POWER) + \"W\";\n        chargeController.stopCharge();\n        node.send(msg);\n    }\n}\n\nif (msg.topic == \"tele/tasmotaRicaricaNissan/SENSOR\"){\n    chargeController.update(msg.payload.ENERGY.Total);\n    powerMonitor.update(msg.payload.ENERGY.Power);\n    msg2 = {};\n    if (chargeController.getStatus() == \"Charged\" && powerMonitor.getStatus() != \"Off\"){\n        chargeController.stopCharge();\n        msg.payload = 0;\n        msg.rce = \"Ricarica completata (\" + chargeController.getChargedEnergy() + \"kWh)\";\n        msg2 = {\n            \"remainingTime\" : \"Ricarica terminata\",\n            \"remainingEnergy\" : \"0\",\n            \"energyToCharge\" : 0,\n            \"percentageDone\" : 100\n        };\n        return [{}, msg2];\n    }\n    if (chargeController.getStatus() == \"Charging\"){\n        msg2 = {\n            \"remainingTime\" : chargeController.getRemaingTime(powerMonitor.getPower()),\n            \"remainingEnergy\" : chargeController.getRemainingEnergy(),\n            \"energyToCharge\" : chargeController.getEnergyToCharge(),\n            \"percentageDone\" : 0\n        };\n        return [{}, msg2];\n    }\n    if (enableDebug){\n        debug = {\n            \"stopCharge\" : chargeController.getEnergyStopChargeVal(),\n            \"startCharge\" : chargeController.getEnergyStartChargeVal(),\n            \"energyTotal\" : chargeController.getEnergyTotal()\n        }\n        return [{}, msg2, debug];\n    }\n    else{\n        return [{}, msg2, {}];\n    }\n}\n\nlet timedOutActivation = context.get('timedOutActivation') || 0;\nif (msg.topic == \"percToCharge\"){\n    if (msg.payload > 0){\n        if (timeSlotMonitor.isEconomyTime()){\n            chargeController.startCharge(msg.payload);\n            msg.payload = 1;\n            msg.rce = \"Avvio ricarica di \" + chargeController.getEnergyToCharge() + \"kWh\";\n        }\n        else{\n            msg.rce = \"Ricarica prenotata. Inserzione tra \" + timeSlotMonitor.getRedeableRemaingTime();\n            msg.payload = 0;\n            timedOutActivation = setTimeout(function(){\n                chargeController.startCharge(msg.payload);\n                msg.payload = 1;\n                msg.rce = \"Avvio ricarica prenotata di \" + chargeController.getEnergyToCharge() + \"kWh\";\n                node.send(msg);\n            }, timeSlotMonitor.getRemaingTime());\n        }\n    }\n    else{\n        chargeController.stopCharge();\n        clearTimeout(timedOutActivation);\n        msg.rce = \"Ricarica annullata\";\n    }\n    node.send(msg);\n}\n\nif (msg.topic == \"forceCharge\"){\n    chargeController.startCharge(100);\n    msg.payload = 1;\n    msg.rce = \"Avvio ricarica forzata\";\n    node.send(msg);\n}\n\ncontext.set('timedOutActivation', timedOutActivation);\ncontext.set('timeSlotMonitor', timeSlotMonitor);\ncontext.set('powerMonitor', powerMonitor);\ncontext.set('chargeController', chargeController);\nreturn;",
+        "outputs": 3,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -10892,7 +10895,8 @@
                 "808b32d8.8ea79",
                 "48fccdbf.62ffc4",
                 "9ce85c86.df6b8"
-            ]
+            ],
+            []
         ]
     },
     {
@@ -10948,8 +10952,8 @@
         "name": "",
         "label": "Setpoint",
         "tooltip": "",
-        "group": "261dd92c.ffff5e",
-        "order": 8,
+        "group": "d4c9b167.50a47",
+        "order": 4,
         "width": 6,
         "height": 1,
         "wrap": true,
@@ -10975,8 +10979,8 @@
         "name": "",
         "label": "Termostato",
         "tooltip": "",
-        "group": "261dd92c.ffff5e",
-        "order": 7,
+        "group": "d4c9b167.50a47",
+        "order": 3,
         "width": 6,
         "height": 1,
         "passthru": true,
@@ -11079,7 +11083,7 @@
         "z": "e987eb50.a7ba78",
         "name": "Force",
         "group": "4f75689c.e4dd2",
-        "order": 5,
+        "order": 4,
         "width": 3,
         "height": 1,
         "passthru": true,
@@ -11269,7 +11273,7 @@
         "type": "ui_text",
         "z": "e987eb50.a7ba78",
         "group": "4f75689c.e4dd2",
-        "order": 9,
+        "order": 8,
         "width": 0,
         "height": 0,
         "name": "",
@@ -11471,36 +11475,9 @@
         ]
     },
     {
-        "id": "ee446384.27bf98",
-        "type": "inject",
-        "z": "5b5ae0eb.cb95b",
-        "d": true,
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "00 06 * * *",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "18",
-        "payloadType": "num",
-        "x": 310,
-        "y": 360,
-        "wires": [
-            [
-                "c4d71d47.b98f2"
-            ]
-        ]
-    },
-    {
         "id": "7b3c47a.955d4b8",
         "type": "inject",
         "z": "5b5ae0eb.cb95b",
-        "d": true,
         "name": "",
         "props": [
             {
@@ -11508,14 +11485,14 @@
             }
         ],
         "repeat": "",
-        "crontab": "45 22 * * *",
+        "crontab": "10 22 * * *",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "25",
         "payloadType": "num",
-        "x": 310,
-        "y": 400,
+        "x": 330,
+        "y": 360,
         "wires": [
             [
                 "c4d71d47.b98f2"
@@ -11806,6 +11783,68 @@
         "wires": [
             [
                 "ce1e9058.cef4e"
+            ]
+        ]
+    },
+    {
+        "id": "d72ba43c.dc27a",
+        "type": "influxdb in",
+        "z": "5b5ae0eb.cb95b",
+        "influxdb": "95c76cc2.f1041",
+        "name": "",
+        "query": "from(bucket: \"Meteo/autogen\") \n|> range(start: -1d)\n|> filter(fn:(r) =>\n    r._measurement == \"Cortile\" and\n    r._field == \"temperature\"\n  )\n|> min()",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 290,
+        "y": 440,
+        "wires": [
+            [
+                "8c2997c9.72c95"
+            ]
+        ]
+    },
+    {
+        "id": "cb0f170c.5c35d8",
+        "type": "inject",
+        "z": "5b5ae0eb.cb95b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 06 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 440,
+        "wires": [
+            [
+                "d72ba43c.dc27a"
+            ]
+        ]
+    },
+    {
+        "id": "8c2997c9.72c95",
+        "type": "function",
+        "z": "5b5ae0eb.cb95b",
+        "name": "",
+        "func": "const MIN_TEMP_EN_HEATING = 10.0;\nif (msg.payload[0]._value <= MIN_TEMP_EN_HEATING){\n    msg.payload = 18.0;\n    node.send(msg);\n}\n\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 320,
+        "y": 400,
+        "wires": [
+            [
+                "c4d71d47.b98f2"
             ]
         ]
     }
