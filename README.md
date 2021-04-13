@@ -33,13 +33,13 @@ Un Sonoff POW2 per monitorare e controllare la ricarica della mia auto elettrica
 Un Sonoff POW2 per monitorare l'energia prodotta da due panellini solari che immettono direttamente in rete.
 
 # Pics
-[Sinottico](https://github.com/metalneo-glitch/RasHome/blob/master/img/Sinottico.png)
-[Controllo dispositivi](https://github.com/metalneo-glitch/RasHome/blob/master/img/Dispositivi.png)
-[Monitoraggio Energia](https://github.com/metalneo-glitch/RasHome/blob/master/img/Energia.png)
-[Monitoraggio Rete](https://github.com/metalneo-glitch/RasHome/blob/master/img/Network.png)
-[Ricarica EV](https://github.com/metalneo-glitch/RasHome/blob/master/img/Ricarica_EV.png)
-[Speedtest Rete](https://github.com/metalneo-glitch/RasHome/blob/master/img/Speedtest.png)
-[Info](https://github.com/metalneo-glitch/RasHome/blob/master/img/About.png)
+![Sinottico](https://github.com/metalneo-glitch/RasHome/blob/master/img/Sinottico.png)
+![Controllo dispositivi](https://github.com/metalneo-glitch/RasHome/blob/master/img/Dispositivi.png)
+![Monitoraggio Energia](https://github.com/metalneo-glitch/RasHome/blob/master/img/Energia.png)
+![Monitoraggio Rete](https://github.com/metalneo-glitch/RasHome/blob/master/img/Network.png)
+![Ricarica EV](https://github.com/metalneo-glitch/RasHome/blob/master/img/Ricarica_EV.png)
+![Speedtest Rete](https://github.com/metalneo-glitch/RasHome/blob/master/img/Speedtest.png)
+![Info](https://github.com/metalneo-glitch/RasHome/blob/master/img/About.png)
 ### Version
 4.0.2
 + Valori min/max visualizzati nel sinottico sono prelevati tramite una query a InfluxDB
