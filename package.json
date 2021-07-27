@@ -6,22 +6,21 @@
         "node-red-configurable-ping": "1.0.1",
         "node-red-contrib-buffer-array": "1.1.0",
         "node-red-contrib-calc": "1.0.5",
-        "node-red-contrib-google-home-notify": "0.0.7",
         "node-red-contrib-influxdb": "0.5.4",
         "node-red-contrib-os": "0.2.0",
         "node-red-contrib-nora": "0.0.34",
         "node-red-contrib-sun-position": "1.1.7",
         "node-red-contrib-telegrambot-home": "0.5.2",
         "node-red-contrib-time-range-switch": "1.0.1",
-        "node-red-contrib-tuya-smart-device": "3.0.1",
         "node-red-contrib-ui-level": "0.1.39",
         "node-red-dashboard": "2.27.0",
         "node-red-node-ui-table": "0.3.10",
         "node-red-node-wol": "0.1.0",
         "node-red-node-rbe": "0.2.9",
-        "node-red-contrib-openhab2": "1.1.8",
         "node-red-contrib-ui-led": "0.4.8",
-        "node-red-contrib-speedtest": "1.0.1"
+        "node-red-contrib-speedtest": "1.0.1",
+        "node-red-contrib-smartnora": "1.0.0-alpha.6",
+        "node-red-google-notify": "1.3.5"
     },
     "node-red": {
         "settings": {
