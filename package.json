@@ -8,7 +8,6 @@
         "node-red-contrib-calc": "1.0.5",
         "node-red-contrib-influxdb": "0.5.4",
         "node-red-contrib-os": "0.2.0",
-        "node-red-contrib-nora": "0.0.34",
         "node-red-contrib-sun-position": "1.1.7",
         "node-red-contrib-telegrambot-home": "0.5.2",
         "node-red-contrib-time-range-switch": "1.0.1",
@@ -20,7 +19,8 @@
         "node-red-contrib-ui-led": "0.4.8",
         "node-red-contrib-speedtest": "1.0.1",
         "node-red-contrib-smartnora": "1.0.0-alpha.6",
-        "node-red-google-notify": "1.3.5"
+        "node-red-google-notify": "1.3.5",
+        "node-red-contrib-cpu": "0.0.4"
     },
     "node-red": {
         "settings": {
