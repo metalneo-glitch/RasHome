@@ -41,7 +41,11 @@ Un Sonoff POW2 per monitorare l'energia prodotta da due panellini solari che imm
 ![Speedtest Rete](https://github.com/metalneo-glitch/RasHome/blob/master/img/Speedtest.png)
 ![Info](https://github.com/metalneo-glitch/RasHome/blob/master/img/About.png)
 ### Version
-<<<<<<< HEAD
+4.2.0
++ Added labelbox on main page to indicat if and how much the home power is exceeding the contractual power (I can keep the power beetween 3.3 and 4.0 kW for 92 minutes before opening the main switch)
++ If I'm charging my car and the home power goes between 3.3 and 3.5kW, a 60min timer will start and will turn off the charging. Power above 3.5 will turn off the charging immediatily
++ Tuned times for the thermostat (winter has come :( )
+
 4.1.0
 + Per sapere quando aprire le finestre nelle sere estive, ogni volta che ricevo la temperatura della camera da letto la confronto con l'ultima temperatura esterna registrata nel database. Quando la temperatura esterna è più bassa di quella interna viene inviato un messaggio telegram per avvisarmi quando spalancare le finestre.
 + Cambiato il programma per la gestione delle notifiche verso dispositivi Google Home
